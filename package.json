@@ -1,0 +1,42 @@
+{
+  "name": "50ra4-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest -c ./jest.config.json --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shigarashi1/50ra4-library.git"
+  },
+  "author": "sigarashi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shigarashi1/50ra4-library/issues"
+  },
+  "homepage": "https://github.com/shigarashi1/50ra4-library#readme",
+  "devDependencies": {
+    "@types/jest": "26.0.14",
+    "@types/node": "14.11.8",
+    "@types/ramda": "0.27.25",
+    "@typescript-eslint/eslint-plugin": "4.4.1",
+    "@typescript-eslint/parser": "4.4.1",
+    "date-fns": "2.16.1",
+    "eslint": "7.11.0",
+    "eslint-config-prettier": "6.12.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "fp-ts": "2.8.4",
+    "husky": "4.3.0",
+    "jest": "26.5.3",
+    "lint-staged": "10.4.0",
+    "prettier": "2.1.2",
+    "ramda": "0.27.1",
+    "rimraf": "3.0.2",
+    "touch": "3.1.0",
+    "ts-jest": "26.4.1",
+    "ts-node": "9.0.0",
+    "typedoc": "0.19.2",
+    "typescript": "4.0.3"
+  }
+}
