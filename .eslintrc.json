@@ -40,14 +40,14 @@
     // turn on errors for missing imports
     "import/no-unresolved": "off",
     "no-var": "error",
-    "no-console": "warn"
-    // "no-restricted-imports": [
-    //   "error",
-    //   {
-    //     paths: ["ramda", "date-fns"],
-    //     patterns: ["!@/library/ramda", "!date-fns/*"],
-    //   },
-    // ],
+    "no-console": "warn",
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": ["ramda", "date-fns"],
+        "patterns": ["!@/ramda", "!date-fns/fp/*"],
+      }
+    ]
   },
   "settings": {
     "import/parsers": {
