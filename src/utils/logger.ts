@@ -28,7 +28,7 @@ const _logger = (logLevel: TLogLevel, message: string, ...optionalParams: Readon
   Console[logLevel](__formatLogMessage(logLevel, message), ...optionalParams);
 
 type Logger = (message: string, optionalParams: readonly unknown[]) => void;
-export const Logger: Record<keyof typeof ELogLevel, Logger> = toPairs(ELogLevel).reduce(
+export const CustomLogger: Record<keyof typeof ELogLevel, Logger> = toPairs(ELogLevel).reduce(
   (acc, [key, value]) => ({ ...acc, [key]: partial(_logger, [value]) }),
   {} as Record<keyof typeof ELogLevel, Logger>,
 );
