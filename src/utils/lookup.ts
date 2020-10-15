@@ -1,6 +1,6 @@
 import { flow } from 'fp-ts/function';
-import { prop } from '@/ramda';
-import { ObjectType } from '@/types';
+import { prop } from '../ramda';
+import { ObjectType } from '../types';
 
 export type TLookup = {
   id: string;

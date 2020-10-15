@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { format } from 'date-fns/fp';
-import { partial, toPairs } from '@/ramda';
+import { partial, toPairs } from '../ramda';
 
 export const ELogLevel = {
   debug: 'DEBUG',

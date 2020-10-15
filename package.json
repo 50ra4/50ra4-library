@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest -c ./jest.config.json --watchAll",
-    "build-check": "tsc --noEmit"
+    "build-check": "tsc --noEmit",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",

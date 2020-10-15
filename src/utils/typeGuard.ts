@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { flow } from 'fp-ts/lib/function';
-import { propEq, toPairs, anyPass, equals } from '@/ramda';
-import { IndexedObject } from '@/types';
-import { EValueType, getValueType, ValueType } from '.';
+import { propEq, toPairs, anyPass, equals } from '../ramda';
+import { IndexedObject } from '../types';
+import { EValueType, getValueType } from '.';
 
 /**
  * enumか？
@@ -12,7 +11,8 @@ export const isEnum = <T>(fromEnum: IndexedObject<T>) => (x: unknown): x is T =>
 /**
  * value type is null or undefined
  */
-export const isNil = (x: unknown): x is undefined | null => getValueType(x) === EValueType.undefined || getValueType(x) === EValueType.null;
+export const isNil = (x: unknown): x is undefined | null =>
+  getValueType(x) === EValueType.undefined || getValueType(x) === EValueType.null;
 /**
  * value type is not null or undefined
  */
