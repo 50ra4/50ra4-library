@@ -18,3 +18,16 @@ export const enum2enum = <T, K>(fromEnum: IndexedObject<T>, toEnum: IndexedObjec
   const toValue = find(pathEq(['0'], fromKey), toPairs(toEnum))?.[1] || defaultValue;
   return toValue;
 };
+
+/**
+ * @example
+ * const enumLikeObject = stringArray2Enum(['hoge', 'fuga'])
+ * enum.hoge // 'hoge'
+ * enum.fuga // 'huga'
+ */
+export const strArr2EnumObject = <T extends string>(o: T[]): Readonly<{ [K in T]: K }> => {
+  return o.reduce((accumulator, currentValue) => {
+    accumulator[currentValue] = currentValue;
+    return accumulator;
+  }, Object.create(null));
+};

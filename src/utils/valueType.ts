@@ -1,18 +1,20 @@
 /* eslint-disable @typescript-eslint/ban-types */
-export const EValueType = {
-  string: 'string',
-  number: 'number',
-  boolean: 'boolean',
-  symbol: 'symbol',
-  bigint: 'bigint',
-  function: 'function',
-  date: 'date',
-  object: 'object',
-  array: 'array',
-  null: 'null',
-  undefined: 'undefined',
-  unknown: 'unknown',
-} as const;
+import { strArr2EnumObject } from '.';
+
+export const EValueType = strArr2EnumObject([
+  'string',
+  'number',
+  'boolean',
+  'symbol',
+  'bigint',
+  'function',
+  'date',
+  'object',
+  'array',
+  'null',
+  'undefined',
+  'unknown',
+]);
 export type ValueType = typeof EValueType[keyof typeof EValueType];
 
 const __getObjectType = (value: object | null): ValueType => {
