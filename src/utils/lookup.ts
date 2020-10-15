@@ -2,7 +2,7 @@ import { flow } from 'fp-ts/function';
 import { prop } from '../ramda';
 import { ObjectType } from '../types';
 
-export type TLookup = {
+export type Lookup = {
   id: string;
   value: string;
 };
@@ -12,14 +12,14 @@ export type TLookup = {
  * @param idKey id
  * @param valueKey value
  */
-export const object2Lookups = <T extends ObjectType>(idKey: keyof T, valueKey: keyof T) => (objArr: T[]): TLookup[] =>
+export const object2Lookups = <T extends ObjectType>(idKey: keyof T, valueKey: keyof T) => (objArr: T[]): Lookup[] =>
   objArr.map((obj) => ({ id: String(prop(idKey, obj)), value: String(prop(valueKey, obj)) }));
 
 /**
  * Lookup[]から{id: value}のObjectを作る
  * @param lookupItems
  */
-export const toLookupObject = (lookupItems: TLookup[]): { [id: string]: string } =>
+export const toLookupObject = (lookupItems: Lookup[]): { [id: string]: string } =>
   lookupItems.reduce((pre, { id, value }) => ({ ...pre, [id]: value }), {});
 
 /**
