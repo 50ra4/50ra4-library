@@ -16,9 +16,9 @@
     "noEmitHelpers": true,
     "outDir": "dist",
     "rootDir": ".",
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     },
     "typeRoots": ["node_modules/@types", "src/types"],
     "strict": true
