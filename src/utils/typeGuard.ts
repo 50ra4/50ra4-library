@@ -9,12 +9,10 @@ import { EValueType, getValueType, ValueType } from '.';
  * @param fromEnum EnumライクなObject
  */
 export const isEnum = <T>(fromEnum: IndexedObject<T>) => (x: unknown): x is T => toPairs(fromEnum).some(propEq('1', x));
-
-const NULL_VALUE_TYPE: Readonly<ValueType>[] = [EValueType.undefined, EValueType.null];
 /**
  * value type is null or undefined
  */
-export const isNil = (x: unknown): x is undefined | null => flow(getValueType, (v) => NULL_VALUE_TYPE.includes(v))(x);
+export const isNil = (x: unknown): x is undefined | null => getValueType(x) === EValueType.undefined || getValueType(x) === EValueType.null;
 /**
  * value type is not null or undefined
  */
