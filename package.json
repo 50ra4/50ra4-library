@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest -c ./jest.config.json --watchAll"
+    "test": "jest -c ./jest.config.json --watchAll",
+    "build-check": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
