@@ -1,6 +1,8 @@
-import { stringArray2EnumLikeObject } from '.';
+import { hasPath, omit, path, pick, toPairs, toString } from '../ramda';
+import { Nullable, ReadonlyPartial } from '../types';
+import { isEmpty, isFunction, isNil, isObject, isValidLength, replaceMessage, stringArray2EnumLikeObject } from '.';
 
-export const EValidatiorType = stringArray2EnumLikeObject([
+export const EValidatorType = stringArray2EnumLikeObject([
   'required', //
   'length',
   'pattern1',
@@ -10,4 +12,158 @@ export const EValidatiorType = stringArray2EnumLikeObject([
   'function2',
   'function3',
 ]);
-export type ValidatiorType = keyof typeof EValidatiorType;
+export type ValidatorType = keyof typeof EValidatorType;
+
+type LengthValidatorType = Extract<ValidatorType, 'length'>;
+type LengthValidatorConfig = { max: number; min?: number };
+
+type PatternValidatorType = Extract<ValidatorType, 'pattern1' | 'pattern2' | 'pattern3'>;
+type PatternValidatorConfig = RegExp;
+
+type FunctionValidatorType = Extract<ValidatorType, 'function1' | 'function2' | 'function3'>;
+type FunctionValidatorConfig<T> = (v: Nullable<T>) => boolean;
+
+type RequiredValidatorType = Extract<ValidatorType, 'required'>;
+type RequiredValidatorConfig<T> = boolean | FunctionValidatorConfig<T>;
+
+type ValidatorConfig<T, K extends ValidatorType> = K extends RequiredValidatorType
+  ? RequiredValidatorConfig<T>
+  : K extends LengthValidatorType
+  ? LengthValidatorConfig
+  : K extends PatternValidatorType
+  ? PatternValidatorConfig
+  : K extends FunctionValidatorType
+  ? FunctionValidatorConfig<T>
+  : never;
+
+const isRequiredValidatorConfig = <T, K extends ValidatorType>(
+  type: K,
+  config: unknown,
+): config is RequiredValidatorConfig<T> => type === EValidatorType.required;
+const isLengthValidatorConfig = <K extends ValidatorType>(
+  type: K, //
+  config: unknown,
+): config is LengthValidatorConfig => type === EValidatorType.length;
+
+const PATTERN_VALIDATOR_TYPE: ReadonlyArray<ValidatorType> = [
+  EValidatorType.pattern1,
+  EValidatorType.pattern2,
+  EValidatorType.pattern3,
+];
+const isPatternValidatorConfig = <K extends ValidatorType>(
+  type: K, //
+  config: unknown,
+): config is PatternValidatorConfig => PATTERN_VALIDATOR_TYPE.includes(type);
+
+export type ValueValidatorConfig<T> = ReadonlyPartial<
+  {
+    [K in ValidatorType]: ValidatorConfig<T, K>;
+  }
+>;
+type ValueValidatorConfigType<T> = ValueValidatorConfig<T>[keyof ValueValidatorConfig<T>];
+
+type ValidationMessageReplaceParameter = {
+  name: string;
+  max?: number;
+  min?: number;
+};
+export type ValueValidatorMessageTemplate<K extends ValidatorType> = Pick<ValidationMessageReplaceParameter, 'name'> &
+  ReadonlyPartial<Record<K, string>>;
+type ValidatorCustomizeConfig<K extends ValidatorType> = ['pick' | 'omit', K[]];
+
+export class ValidationError implements TypeError {
+  public readonly name = 'ValidationError';
+  public readonly message: string;
+
+  private toMessage(type: ValidatorType) {
+    const _template = this.template[type] ?? `{name} is invalid value.(${toString(this.value)})`;
+    return replaceMessage(_template, this.parameter);
+  }
+
+  constructor(
+    public readonly value: unknown,
+    public readonly types: ReadonlyArray<ValidatorType>, //
+    public readonly template: ValueValidatorMessageTemplate<ValidatorType>,
+    public readonly parameter: ValidationMessageReplaceParameter,
+  ) {
+    this.message = this.toMessage(types[0]);
+  }
+
+  get messages(): string[] {
+    return this.types.map(this.toMessage);
+  }
+}
+
+const toMessageReplaceParameter = <T>(
+  validatorConfig: ValueValidatorConfig<T>,
+  template: ValueValidatorMessageTemplate<keyof typeof validatorConfig>,
+): ValidationMessageReplaceParameter => {
+  const { name } = template;
+  const lengthConfig = path([EValidatorType.length], validatorConfig);
+  if (!isObject(lengthConfig)) {
+    return { name };
+  }
+  return { name, ...lengthConfig };
+};
+
+// eslint-disable-next-line complexity
+const isInvalidValue = <T>(
+  value: T,
+  isRequired: boolean,
+  type: ValidatorType, //
+  config: ValueValidatorConfigType<T>,
+): boolean => {
+  if (isNil(config)) {
+    return false;
+  }
+  if (!isRequired && isEmpty(value)) {
+    // If it is not a required input item and it is not entered, false is returned.
+    return false;
+  }
+  if (isFunction(config)) {
+    return !isFunction(value);
+  }
+  if (isRequiredValidatorConfig<T, typeof type>(type, config)) {
+    return isEmpty(value);
+  }
+  if (isLengthValidatorConfig(type, config)) {
+    return !isValidLength(config, value);
+  }
+  if (isPatternValidatorConfig(type, config)) {
+    return !config.test(toString(value));
+  }
+  // never
+  return true;
+};
+
+const customizeValueValidator = <T>(
+  validatorConfig: ValueValidatorConfig<T>,
+  customConfig: ValidatorCustomizeConfig<keyof typeof validatorConfig>,
+): ValueValidatorConfig<T> => {
+  const [option, types] = customConfig;
+  return option === 'pick' //
+    ? pick(types, validatorConfig)
+    : omit(types, validatorConfig);
+};
+
+export const valueValidator = <T>(validatorConfig: ValueValidatorConfig<T>) => (
+  template: ValueValidatorMessageTemplate<keyof typeof validatorConfig>,
+  customConfig: ValidatorCustomizeConfig<keyof typeof validatorConfig>,
+) => (value: T): ValidationError | false => {
+  const customizedValidator = customizeValueValidator(validatorConfig, customConfig);
+  const isRequired = hasPath(['required'], customizedValidator);
+  const invalidTypes = toPairs(customizedValidator)
+    // type cast
+    .map(([type, conf]) => [type, conf] as [ValidatorType, ValueValidatorConfigType<T>])
+    .reduce(
+      (acc, [type, conf]) => (isInvalidValue(value, isRequired, type, conf) ? [...acc, type] : acc),
+      [] as ReadonlyArray<ValidatorType>,
+    );
+
+  if (invalidTypes.length) {
+    const messageParameter = toMessageReplaceParameter(validatorConfig, template);
+    return new ValidationError(value, invalidTypes, template, messageParameter);
+  }
+  // has no error
+  return false;
+};
