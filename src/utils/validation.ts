@@ -101,8 +101,9 @@ const toMessageReplaceParameter = <T>(
 const isInvalidValue = <T>(
   value: T,
   isRequired: boolean,
-  type: ValidatorType, //
   config: ValueValidatorConfigType<T>,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  type: ValidatorType, //
 ): boolean => {
   if (isNil(config)) {
     return false;
@@ -112,12 +113,15 @@ const isInvalidValue = <T>(
     return false;
   }
   if (isFunction(config)) {
-    return !isFunction(value);
+    return !config(value);
   }
   if (isBoolean(config)) {
     return isEmpty(value);
   }
   if (isRegExp(config)) {
+    if (Array.isArray(value)) {
+      return !value.map(toString).every(config.test);
+    }
     return !config.test(toString(value));
   }
   if (isObject(config)) {
@@ -147,7 +151,7 @@ export const valueValidator = <T>(validatorConfig: ValueValidatorConfig<T>) => (
     // type cast
     .map(([type, conf]) => [type, conf] as [ValidatorType, ValueValidatorConfigType<T>])
     .reduce(
-      (acc, [type, conf]) => (isInvalidValue(value, isRequired, type, conf) ? [...acc, type] : acc),
+      (acc, [type, conf]) => (isInvalidValue(value, isRequired, conf, type) ? [...acc, type] : acc),
       [] as ReadonlyArray<ValidatorType>,
     );
 
