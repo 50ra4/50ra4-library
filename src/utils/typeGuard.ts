@@ -20,9 +20,10 @@ export const isString = (x: unknown): x is string => valueTypeEq(x, EValueType.s
 export const isNumber = (x: unknown): x is number => valueTypeEq(x, EValueType.number);
 export const isBoolean = (x: unknown): x is boolean => valueTypeEq(x, EValueType.boolean);
 export const isFunction = (x: unknown): x is Function => valueTypeEq(x, EValueType.function);
-// export const isDate = (x: unknown): x is Date => valueTypeEq(x, EValueType.date);
+export const isDate = (x: unknown): x is Date => valueTypeEq(x, EValueType.date);
 export const isObject = (x: unknown): x is object => valueTypeEq(x, EValueType.object);
 export const isArray = <T = unknown>(x: unknown): x is T[] => valueTypeEq(x, EValueType.array);
+export const isRegExp = (x: unknown): x is RegExp => valueTypeEq(x, EValueType.regExp);
 
 export const isEmptyString = (x: unknown): x is '' => isString(x) && equals(x, '');
 export const isEmptyObject = (x: unknown): x is {} => isObject(x) && equals(x, {});

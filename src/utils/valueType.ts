@@ -9,11 +9,12 @@ export const EValueType = stringArray2EnumLikeObject([
   'symbol',
   'bigint',
   'function',
-  'date',
+  'undefined',
   'object',
   'array',
+  'date',
   'null',
-  'undefined',
+  'regExp',
   'unknown',
 ]);
 export type ValueType = typeof EValueType[keyof typeof EValueType];
@@ -27,6 +28,9 @@ const __getObjectType = (value: object | null): ValueType => {
   }
   if (value instanceof Date) {
     return EValueType.date;
+  }
+  if (value instanceof RegExp) {
+    return EValueType.regExp;
   }
   return EValueType.object;
 };
