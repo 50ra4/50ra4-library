@@ -110,7 +110,7 @@ describe('valueValidator', () => {
       expect(result).toBeFalsy();
     });
   });
-  describe('LinksMessageTemplate', () => {
+  describe('LinksValidator', () => {
     const validator = linksValidator(LinksMessageTemplate);
     it('not invalid value should return false', () => {
       const result = validator(['https://github.com/shigarashi1/50ra4-library/pull/3/files']);
