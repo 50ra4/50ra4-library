@@ -105,49 +105,49 @@ const createdAtValidator = valueValidator(CreatedAtValidator);
 describe('valueValidator', () => {
   describe('IssueNumberValidator', () => {
     const validator = issueNumberValidator(IssueNumberMessageTemplate);
-    it('return true', () => {
+    it('not invalid value should return false', () => {
       const result = validator(1111);
       expect(result).toBeFalsy();
     });
   });
   describe('LinksMessageTemplate', () => {
     const validator = linksValidator(LinksMessageTemplate);
-    it('', () => {
+    it('not invalid value should return false', () => {
       const result = validator(['https://github.com/shigarashi1/50ra4-library/pull/3/files']);
       expect(result).toBeFalsy();
     });
   });
   describe('TitleValidator', () => {
     const validator = titleValidator(TitleMessageTemplate);
-    it('', () => {
+    it('not invalid value should return false', () => {
       const result = validator('アイウエオかきくけこさ');
       expect(result).toBeFalsy();
     });
   });
   describe('DescriptionMessageTemplate', () => {
     const validator = descriptionValidator(DescriptionMessageTemplate);
-    it('', () => {
+    it('not invalid value should return false', () => {
       const result = validator('');
       expect(result).toBeFalsy();
     });
   });
   describe('PriorityValidator', () => {
     const validator = priorityValidator(PriorityMessageTemplate);
-    it('', () => {
+    it('not invalid value should return false', () => {
       const result = validator({ id: '1', value: '' });
       expect(result).toBeFalsy();
     });
   });
   describe('LabelsValidator', () => {
     const validator = labelValidator(LabelsMessageTemplate);
-    it('', () => {
+    it('not invalid value should return false', () => {
       const result = validator([]);
       expect(result).toBeFalsy();
     });
   });
   describe('CreatedAtValidator', () => {
     const validator = createdAtValidator(CreatedAtMessageTemplate);
-    it('', () => {
+    it('not invalid value should return false', () => {
       const result = validator('2020-10-18');
       expect(result).toBeFalsy();
     });
