@@ -1,6 +1,16 @@
 import { hasPath, omit, path, pick, toPairs, toString } from '../ramda';
 import { Nullable, ReadonlyPartial } from '../types';
-import { isEmpty, isFunction, isNil, isObject, isValidLength, replaceMessage, stringArray2EnumLikeObject } from '.';
+import {
+  isBoolean,
+  isEmpty,
+  isFunction,
+  isNil,
+  isObject,
+  isRegExp,
+  isValidLength,
+  replaceMessage,
+  stringArray2EnumLikeObject,
+} from '.';
 
 export const EValidatorType = stringArray2EnumLikeObject([
   'required', //
@@ -24,7 +34,7 @@ type FunctionValidatorType = Extract<ValidatorType, 'function1' | 'function2' | 
 type FunctionValidatorConfig<T> = (v: Nullable<T>) => boolean;
 
 type RequiredValidatorType = Extract<ValidatorType, 'required'>;
-type RequiredValidatorConfig<T> = boolean | FunctionValidatorConfig<T>;
+type RequiredValidatorConfig<T> = true | FunctionValidatorConfig<T>;
 
 type ValidatorConfig<T, K extends ValidatorType> = K extends RequiredValidatorType
   ? RequiredValidatorConfig<T>
@@ -35,25 +45,6 @@ type ValidatorConfig<T, K extends ValidatorType> = K extends RequiredValidatorTy
   : K extends FunctionValidatorType
   ? FunctionValidatorConfig<T>
   : never;
-
-const isRequiredValidatorConfig = <T, K extends ValidatorType>(
-  type: K,
-  config: unknown,
-): config is RequiredValidatorConfig<T> => type === EValidatorType.required;
-const isLengthValidatorConfig = <K extends ValidatorType>(
-  type: K, //
-  config: unknown,
-): config is LengthValidatorConfig => type === EValidatorType.length;
-
-const PATTERN_VALIDATOR_TYPE: ReadonlyArray<ValidatorType> = [
-  EValidatorType.pattern1,
-  EValidatorType.pattern2,
-  EValidatorType.pattern3,
-];
-const isPatternValidatorConfig = <K extends ValidatorType>(
-  type: K, //
-  config: unknown,
-): config is PatternValidatorConfig => PATTERN_VALIDATOR_TYPE.includes(type);
 
 export type ValueValidatorConfig<T> = ReadonlyPartial<
   {
@@ -123,14 +114,14 @@ const isInvalidValue = <T>(
   if (isFunction(config)) {
     return !isFunction(value);
   }
-  if (isRequiredValidatorConfig<T, typeof type>(type, config)) {
+  if (isBoolean(config)) {
     return isEmpty(value);
   }
-  if (isLengthValidatorConfig(type, config)) {
-    return !isValidLength(config, value);
-  }
-  if (isPatternValidatorConfig(type, config)) {
+  if (isRegExp(config)) {
     return !config.test(toString(value));
+  }
+  if (isObject(config)) {
+    return !isValidLength(config, value);
   }
   // never
   return true;
