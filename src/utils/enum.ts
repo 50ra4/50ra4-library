@@ -25,7 +25,7 @@ export const enum2enum = <T, K>(fromEnum: IndexedObject<T>, toEnum: IndexedObjec
  * enum.hoge // 'hoge'
  * enum.fuga // 'huga'
  */
-export const strArr2EnumObject = <T extends string>(o: T[]): Readonly<{ [K in T]: K }> => {
+export const stringArray2EnumLikeObject = <T extends string>(o: T[]): Readonly<{ [K in T]: K }> => {
   return o.reduce((accumulator, currentValue) => {
     accumulator[currentValue] = currentValue;
     return accumulator;

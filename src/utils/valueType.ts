@@ -1,7 +1,8 @@
+/* eslint-disable complexity */
 /* eslint-disable @typescript-eslint/ban-types */
-import { strArr2EnumObject } from '.';
+import { stringArray2EnumLikeObject } from '.';
 
-export const EValueType = strArr2EnumObject([
+export const EValueType = stringArray2EnumLikeObject([
   'string',
   'number',
   'boolean',
@@ -30,7 +31,6 @@ const __getObjectType = (value: object | null): ValueType => {
   return EValueType.object;
 };
 
-// eslint-disable-next-line complexity
 export const getValueType = (value: unknown): ValueType => {
   switch (typeof value) {
     case 'string':
