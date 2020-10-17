@@ -1,5 +1,5 @@
-import { toPairs } from '@/ramda';
-import { ELogLevel, __formatLogMessage } from '@/utils';
+import { toPairs } from '../../src/ramda';
+import { ELogLevel, __formatLogMessage } from '../../src/utils';
 
 describe('_formatLogMessage', () => {
   it('LogLevelに応じた`[xxx]`設定したmessageを返却', () => {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { propEq, toPairs, anyPass, equals } from '../ramda';
 import { IndexedObject } from '../types';
-import { EValueType, getValueType, ValueType } from '.';
+import { EValueType, getValueType, ValueType, isNillValueType } from '.';
 import { flow } from 'fp-ts/lib/function';
 
 /**
@@ -10,8 +10,6 @@ import { flow } from 'fp-ts/lib/function';
  */
 export const isEnum = <T>(fromEnum: IndexedObject<T>) => (x: unknown): x is T => toPairs(fromEnum).some(propEq('1', x));
 
-const NullValueType: ReadonlyArray<ValueType> = [EValueType.undefined, EValueType.null];
-const isNillValueType = (v: ValueType) => NullValueType.includes(v);
 export const isNil = (x: unknown): x is undefined | null => flow(getValueType, isNillValueType)(x);
 export const isNonNullable = <T = unknown>(x: T): x is NonNullable<T> => !isNil(x);
 
