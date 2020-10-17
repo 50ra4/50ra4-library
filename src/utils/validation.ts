@@ -12,7 +12,7 @@ import {
   stringArray2EnumLikeObject,
 } from '.';
 
-export const EValidatorType = stringArray2EnumLikeObject([
+const EValidatorType = stringArray2EnumLikeObject([
   'required', //
   'length',
   'pattern1',
@@ -22,7 +22,7 @@ export const EValidatorType = stringArray2EnumLikeObject([
   'function2',
   'function3',
 ]);
-export type ValidatorType = keyof typeof EValidatorType;
+type ValidatorType = keyof typeof EValidatorType;
 
 type LengthValidatorType = Extract<ValidatorType, 'length'>;
 type LengthValidatorConfig = { max: number; min?: number };
@@ -74,8 +74,8 @@ export class ValidationError implements TypeError {
   constructor(
     public readonly value: unknown,
     public readonly types: ReadonlyArray<ValidatorType>, //
-    public readonly template: ValueValidatorMessageTemplate<ValidatorType>,
-    public readonly parameter: ValidationMessageReplaceParameter,
+    private readonly template: ValueValidatorMessageTemplate<ValidatorType>,
+    private readonly parameter: ValidationMessageReplaceParameter,
   ) {
     this.message = this.toMessage(types[0]);
   }
@@ -120,7 +120,7 @@ const isInvalidValue = <T>(
   }
   if (isRegExp(config)) {
     if (Array.isArray(value)) {
-      return !value.map(toString).every(config.test);
+      return !value.map(toString).every((v) => config.test(v));
     }
     return !config.test(toString(value));
   }
@@ -133,8 +133,11 @@ const isInvalidValue = <T>(
 
 const customizeValueValidator = <T>(
   validatorConfig: ValueValidatorConfig<T>,
-  customConfig: ValidatorCustomizeConfig<keyof typeof validatorConfig>,
+  customConfig?: ValidatorCustomizeConfig<keyof typeof validatorConfig>,
 ): ValueValidatorConfig<T> => {
+  if (!customConfig) {
+    return validatorConfig;
+  }
   const [option, types] = customConfig;
   return option === 'pick' //
     ? pick(types, validatorConfig)
@@ -143,7 +146,7 @@ const customizeValueValidator = <T>(
 
 export const valueValidator = <T>(validatorConfig: ValueValidatorConfig<T>) => (
   template: ValueValidatorMessageTemplate<keyof typeof validatorConfig>,
-  customConfig: ValidatorCustomizeConfig<keyof typeof validatorConfig>,
+  customConfig?: ValidatorCustomizeConfig<keyof typeof validatorConfig>,
 ) => (value: T): ValidationError | false => {
   const customizedValidator = customizeValueValidator(validatorConfig, customConfig);
   const isRequired = hasPath(['required'], customizedValidator);

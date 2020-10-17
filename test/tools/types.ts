@@ -2,10 +2,10 @@ import { Lookup } from '../../src/utils';
 
 export type Issue = {
   number: number;
-  url: string;
+  links: string[];
   title: string;
   description: string;
   priority: Lookup;
-  label: Lookup[];
+  labels: Lookup[];
   createdAt: string;
 };

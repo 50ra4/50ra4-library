@@ -57,3 +57,6 @@ export const getValueType = (value: unknown): ValueType => {
       return EValueType.unknown;
   }
 };
+
+const NullValueType: ReadonlyArray<ValueType> = [EValueType.undefined, EValueType.null];
+export const isNillValueType = (v: ValueType) => NullValueType.includes(v);

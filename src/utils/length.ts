@@ -14,10 +14,10 @@ export const toLength = (value: unknown): number => {
 export const isValidLength = (config: { max: number; min?: number }, value: unknown): boolean => {
   const { max, min } = config;
   const length = toLength(value);
-  const isLteMax = lte(max);
+  const isLteMax = gte(max);
   if (!min) {
     return isLteMax(length);
   }
-  const isGteMin = gte(min);
+  const isGteMin = lte(min);
   return allPass([isLteMax, isGteMin])(length);
 };
