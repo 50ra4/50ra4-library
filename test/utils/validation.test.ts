@@ -1,16 +1,25 @@
 import isBefore from 'date-fns/fp/isBefore';
 import parseISO from 'date-fns/fp/parseISO';
+import { repeat } from '../../src/ramda';
 
-import { ValueValidatorConfig, ValueValidatorMessageTemplate, isNonNullable, valueValidator } from '../../src/utils';
+import {
+  ValueValidatorConfig,
+  ValueValidatorMessageTemplate,
+  isNonNullable,
+  valueValidator,
+  ValidationError,
+  EValidatorType,
+} from '../../src/utils';
 import { Issue } from '../tools/types';
 
-type IssueNumber = Issue['number'];
-type Links = Issue['links'];
-type Title = Issue['title'];
-type Description = Issue['description'];
-type Priority = Issue['priority'];
-type Labelss = Issue['labels'];
-type CreatedAt = Issue['createdAt'];
+type PartialIssue = Partial<Issue>;
+type IssueNumber = PartialIssue['number'];
+type Links = PartialIssue['links'];
+type Title = PartialIssue['title'];
+type Description = PartialIssue['description'];
+type Priority = PartialIssue['priority'];
+type Labelss = PartialIssue['labels'];
+type CreatedAt = PartialIssue['createdAt'];
 
 const IssueNumberValidator: ValueValidatorConfig<IssueNumber> = {
   required: true,
@@ -102,12 +111,35 @@ const CreatedAtMessageTemplate: ValueValidatorMessageTemplate<keyof typeof Creat
 };
 const createdAtValidator = valueValidator(CreatedAtValidator);
 
+const shouldError = (falseOrError: false | ValidationError): falseOrError is ValidationError => {
+  if (!falseOrError) {
+    // always Error
+    expect(falseOrError).toBeTruthy();
+    return false;
+  }
+  expect(falseOrError).toBeInstanceOf(ValidationError);
+  return true;
+};
+
 describe('valueValidator', () => {
   describe('IssueNumberValidator', () => {
     const validator = issueNumberValidator(IssueNumberMessageTemplate);
     it('not invalid value should return false', () => {
       const result = validator(1111);
       expect(result).toBeFalsy();
+    });
+    it('should return ValidationError type required', () => {
+      const result = validator(undefined);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.required);
+      }
+    });
+    it('should return ValidationError type length', () => {
+      const result = validator(11111);
+      expect(result).toBeInstanceOf(ValidationError);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.length);
+      }
     });
   });
   describe('LinksValidator', () => {
@@ -116,12 +148,38 @@ describe('valueValidator', () => {
       const result = validator(['https://github.com/shigarashi1/50ra4-library/pull/3/files']);
       expect(result).toBeFalsy();
     });
+    it('should return ValidationError function1 type', () => {
+      const result = validator(['https://www.google.com/?hl=ja']);
+      expect(result).toBeInstanceOf(ValidationError);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.function1);
+      }
+    });
+    it('should return ValidationError pettern1 type', () => {
+      const result = validator(['aaaaa://www.google.com/?hl=ja']);
+      expect(result).toBeInstanceOf(ValidationError);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.pattern1);
+      }
+    });
   });
   describe('TitleValidator', () => {
     const validator = titleValidator(TitleMessageTemplate);
     it('not invalid value should return false', () => {
-      const result = validator('アイウエオかきくけこさ');
+      const result = validator('アイウエオかきくけこ');
       expect(result).toBeFalsy();
+    });
+    it('return ValidationError type length', () => {
+      const result1 = validator('アイウエオかきくけ');
+      expect(result1).toBeInstanceOf(ValidationError);
+      if (result1) {
+        expect(result1.types).toContain(EValidatorType.length);
+      }
+      const result2 = validator(repeat('あ', 101).join(''));
+      expect(result2).toBeInstanceOf(ValidationError);
+      if (result2) {
+        expect(result2.types).toContain(EValidatorType.length);
+      }
     });
   });
   describe('DescriptionMessageTemplate', () => {

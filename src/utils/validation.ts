@@ -12,7 +12,7 @@ import {
   stringArray2EnumLikeObject,
 } from '.';
 
-const EValidatorType = stringArray2EnumLikeObject([
+export const EValidatorType = stringArray2EnumLikeObject([
   'required', //
   'length',
   'pattern1',
