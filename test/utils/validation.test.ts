@@ -1,16 +1,27 @@
 import isBefore from 'date-fns/fp/isBefore';
 import parseISO from 'date-fns/fp/parseISO';
+import { repeat } from '../../src/ramda';
 
-import { ValueValidatorConfig, ValueValidatorMessageTemplate, isNonNullable, valueValidator } from '../../src/utils';
+import {
+  ValueValidatorConfig,
+  ValueValidatorMessageTemplate,
+  isNonNullable,
+  valueValidator,
+  ValidationError,
+  EValidatorType,
+  Lookup,
+  isNil,
+} from '../../src/utils';
 import { Issue } from '../tools/types';
 
-type IssueNumber = Issue['number'];
-type Links = Issue['links'];
-type Title = Issue['title'];
-type Description = Issue['description'];
-type Priority = Issue['priority'];
-type Labelss = Issue['labels'];
-type CreatedAt = Issue['createdAt'];
+type PartialIssue = Partial<Issue>;
+type IssueNumber = PartialIssue['number'];
+type Links = PartialIssue['links'];
+type Title = PartialIssue['title'];
+type Description = PartialIssue['description'];
+type Priority = PartialIssue['priority'];
+type Labelss = PartialIssue['labels'];
+type CreatedAt = PartialIssue['createdAt'];
 
 const IssueNumberValidator: ValueValidatorConfig<IssueNumber> = {
   required: true,
@@ -64,8 +75,8 @@ const descriptionValidator = valueValidator(DescriptionValidator);
 
 const PriorityValidator: ValueValidatorConfig<Priority> = {
   required: true,
-  function1: (v) => isNonNullable(v) && v.id.length < 10,
-  function2: (v) => isNonNullable(v) && v.id.length === 1,
+  function1: (v) => !isNil(v) && !!v?.id && v.id.length < 2,
+  function2: (v) => !isNil(v) && !!v?.value && v.value === 'high',
 };
 const PriorityMessageTemplate: ValueValidatorMessageTemplate<keyof typeof PriorityValidator> = {
   name: 'Priority',
@@ -77,14 +88,14 @@ const priorityValidator = valueValidator(PriorityValidator);
 
 const LabelsValidator: ValueValidatorConfig<Labelss> = {
   length: { max: 3 },
-  function1: (v) => isNonNullable(v) && v.every((vv) => vv.id.length < 10),
-  function2: (v) => isNonNullable(v) && v.every((vv) => v.filter((vvv) => vvv === vv).length > 1),
+  function1: (v) => isNonNullable(v) && v.every((vv) => vv.id.length < 2),
+  function2: (v) => isNonNullable(v) && v.every((vv) => v.filter((vvv) => vvv.id === vv.id).length > 1),
 };
 const LabelsMessageTemplate: ValueValidatorMessageTemplate<keyof typeof LabelsValidator> = {
   name: 'Labels',
   length: '{name} is selected over {max}.',
   function1: "{name}'s id is not under 10.",
-  function2: '{name} is not dupulicated.',
+  function2: '{name} is dupulicated.',
 };
 const labelValidator = valueValidator(LabelsValidator);
 
@@ -102,54 +113,210 @@ const CreatedAtMessageTemplate: ValueValidatorMessageTemplate<keyof typeof Creat
 };
 const createdAtValidator = valueValidator(CreatedAtValidator);
 
+const shouldError = (falseOrError: false | ValidationError): falseOrError is ValidationError => {
+  if (!falseOrError) {
+    // always failed test case
+    expect(falseOrError).toBeTruthy();
+    return false;
+  }
+  expect(falseOrError).toBeInstanceOf(ValidationError);
+  return true;
+};
+
+const repeatString = (str: string, times: number) => repeat(str, times).join('');
+
 describe('valueValidator', () => {
   describe('IssueNumberValidator', () => {
     const validator = issueNumberValidator(IssueNumberMessageTemplate);
-    it('not invalid value should return false', () => {
+    it('false', () => {
       const result = validator(1111);
       expect(result).toBeFalsy();
+    });
+    it('error required', () => {
+      const result = validator(undefined);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.required);
+      }
+    });
+    it('error length', () => {
+      const result = validator(11111);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.length);
+      }
+    });
+    it('error pattern1', () => {
+      const result = validator(('111a' as unknown) as number);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.pattern1);
+      }
     });
   });
   describe('LinksValidator', () => {
     const validator = linksValidator(LinksMessageTemplate);
-    it('not invalid value should return false', () => {
+    it('false', () => {
       const result = validator(['https://github.com/shigarashi1/50ra4-library/pull/3/files']);
       expect(result).toBeFalsy();
+    });
+    it('error required', () => {
+      const result = validator([]);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.required);
+      }
+    });
+    it('error function1', () => {
+      const result = validator(['https://www.google.com/mail']);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.function1);
+      }
+    });
+    it('error pettern1', () => {
+      const result = validator(['aaaaa://www.google.com/?hl=ja']);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.pattern1);
+      }
+    });
+    it('error length', () => {
+      const result = validator([
+        'https://github.com/shigarashi1/50ra4-library',
+        'https://github.com/shigarashi1/50ra4-library',
+        'https://github.com/shigarashi1/50ra4-library',
+        'https://github.com/shigarashi1/50ra4-library',
+      ]);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.length);
+      }
     });
   });
   describe('TitleValidator', () => {
     const validator = titleValidator(TitleMessageTemplate);
-    it('not invalid value should return false', () => {
-      const result = validator('アイウエオかきくけこさ');
-      expect(result).toBeFalsy();
+    it('false', () => {
+      const result1 = validator(repeatString('あ', 10));
+      expect(result1).toBeFalsy();
+      const result2 = validator(repeatString('あ', 100));
+      expect(result2).toBeFalsy();
+    });
+    it('error required', () => {
+      const result = validator('');
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.required);
+      }
+    });
+    it('error length', () => {
+      const result1 = validator(repeatString('あ', 9));
+      if (shouldError(result1)) {
+        expect(result1.types).toContain(EValidatorType.length);
+      }
+      const result2 = validator(repeatString('あ', 101));
+      if (shouldError(result2)) {
+        expect(result2.types).toContain(EValidatorType.length);
+      }
     });
   });
   describe('DescriptionMessageTemplate', () => {
     const validator = descriptionValidator(DescriptionMessageTemplate);
-    it('not invalid value should return false', () => {
-      const result = validator('');
-      expect(result).toBeFalsy();
+    it('false', () => {
+      const result1 = validator(repeatString('あ', 1000));
+      expect(result1).toBeFalsy();
+      const result2 = validator(undefined);
+      expect(result2).toBeFalsy();
+    });
+    it('error length', () => {
+      const result = validator(repeatString('あ', 1001));
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.length);
+      }
     });
   });
   describe('PriorityValidator', () => {
     const validator = priorityValidator(PriorityMessageTemplate);
-    it('not invalid value should return false', () => {
-      const result = validator({ id: '1', value: '' });
+    it('false', () => {
+      const result = validator({ id: '1', value: 'high' });
       expect(result).toBeFalsy();
+    });
+    it('required', () => {
+      const result1 = validator({} as Lookup);
+      if (shouldError(result1)) {
+        expect(result1.types).toContain(EValidatorType.required);
+      }
+      const result2 = validator(undefined);
+      if (shouldError(result2)) {
+        expect(result2.types).toContain(EValidatorType.required);
+      }
+    });
+    it('function1', () => {
+      const result = validator({ id: '10' } as Lookup);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.function1);
+      }
+    });
+    it('function2', () => {
+      const result = validator({ id: '1', value: 'low' });
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.function2);
+      }
     });
   });
   describe('LabelsValidator', () => {
     const validator = labelValidator(LabelsMessageTemplate);
-    it('not invalid value should return false', () => {
+    it('false', () => {
       const result = validator([]);
       expect(result).toBeFalsy();
+    });
+    it('length', () => {
+      const result = validator([
+        { id: '1', value: '1' },
+        { id: '2', value: '2' },
+        { id: '3', value: '3' },
+        { id: '4', value: '4' },
+      ]);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.length);
+      }
+    });
+    it('function1', () => {
+      const result = validator([
+        { id: '10', value: '1' },
+        { id: '2', value: '2' },
+        { id: '3', value: '3' },
+      ]);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.function1);
+      }
+    });
+    it('function2', () => {
+      const result = validator([
+        { id: '2', value: '1' },
+        { id: '2', value: '2' },
+        { id: '3', value: '3' },
+      ]);
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.function2);
+      }
     });
   });
   describe('CreatedAtValidator', () => {
     const validator = createdAtValidator(CreatedAtMessageTemplate);
-    it('not invalid value should return false', () => {
+    it('false', () => {
       const result = validator('2020-10-18');
       expect(result).toBeFalsy();
+    });
+    it('error required', () => {
+      const result = validator('');
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.required);
+      }
+    });
+    it('error pattern1', () => {
+      const result = validator('2020-1-1');
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.pattern1);
+      }
+    });
+    it('error function1', () => {
+      const result = validator('2020-10-17');
+      if (shouldError(result)) {
+        expect(result.types).toContain(EValidatorType.function1);
+      }
     });
   });
 });
