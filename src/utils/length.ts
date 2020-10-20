@@ -1,12 +1,16 @@
 import { allPass, gte, lte } from '../ramda';
-import { isArray, isNumber, isString } from '.';
+import { isArray, isNumber, isString, isNil } from '.';
 
+// eslint-disable-next-line complexity
 export const toLength = (value: unknown): number => {
   if (isNumber(value)) {
     return value;
   }
   if (isArray(value) || isString(value)) {
     return value.length;
+  }
+  if (isNil(value)) {
+    return 0;
   }
   return NaN;
 };

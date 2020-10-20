@@ -1,6 +1,7 @@
 import { hasPath, omit, path, pick, toPairs, toString } from '../ramda';
 import { Nullable, ReadonlyPartial } from '../types';
 import {
+  isArray,
   isBoolean,
   isEmpty,
   isFunction,
@@ -98,13 +99,7 @@ const toMessageReplaceParameter = <T>(
 };
 
 // eslint-disable-next-line complexity
-const isInvalidValue = <T>(
-  value: T,
-  isRequired: boolean,
-  config: ValueValidatorConfigType<T>,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  type: ValidatorType, //
-): boolean => {
+const isInvalidValue = <T>(value: T, isRequired: boolean, config: ValueValidatorConfigType<T>): boolean => {
   if (isNil(config)) {
     return false;
   }
@@ -119,10 +114,10 @@ const isInvalidValue = <T>(
     return isEmpty(value);
   }
   if (isRegExp(config)) {
-    if (Array.isArray(value)) {
-      return !value.map(toString).every((v) => config.test(v));
+    if (isArray(value)) {
+      return !value.map(toString).every((v) => v.match(config));
     }
-    return !config.test(toString(value));
+    return !toString(value).match(config);
   }
   if (isObject(config)) {
     return !isValidLength(config, value);
@@ -154,7 +149,7 @@ export const valueValidator = <T>(validatorConfig: ValueValidatorConfig<T>) => (
     // type cast
     .map(([type, conf]) => [type, conf] as [ValidatorType, ValueValidatorConfigType<T>])
     .reduce(
-      (acc, [type, conf]) => (isInvalidValue(value, isRequired, conf, type) ? [...acc, type] : acc),
+      (acc, [type, conf]) => (isInvalidValue(value, isRequired, conf) ? [...acc, type] : acc),
       [] as ReadonlyArray<ValidatorType>,
     );
 
