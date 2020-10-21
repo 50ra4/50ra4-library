@@ -9,10 +9,10 @@ export const EDateFormat = {
 } as const;
 type DateFormatKey = keyof typeof EDateFormat;
 type DateFormat = typeof EDateFormat[DateFormatKey];
-const _format = format('');
+
 export const formatDate = toPairs(EDateFormat)
   .map((v) => v as [DateFormatKey, DateFormat])
   .reduce(
     (acc, [key, fmt]) => ({ ...acc, [key]: format(fmt) }), //
-    {} as Record<DateFormatKey, typeof _format>,
+    {} as Record<DateFormatKey, (dateStr: string) => Date>,
   );
