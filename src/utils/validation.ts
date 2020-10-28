@@ -1,6 +1,7 @@
-import { hasPath, omit, path, pick, toPairs, toString } from '../ramda';
+import { gte, hasPath, lte, omit, path, pick, toPairs, toString } from '../ramda';
 import { Nullable, ReadonlyPartial } from '../types';
 import {
+  allPass,
   isArray,
   isBoolean,
   isEmpty,
@@ -8,9 +9,9 @@ import {
   isNil,
   isObject,
   isRegExp,
-  isValidLength,
   replaceMessage,
   stringArray2EnumLikeObject,
+  toLength,
 } from '.';
 
 export const EValidatorType = stringArray2EnumLikeObject([
@@ -96,6 +97,17 @@ const toMessageReplaceParameter = <T>(
     return { name };
   }
   return { name, ...lengthConfig };
+};
+
+export const isValidLength = (config: { max: number; min?: number }, value: unknown): boolean => {
+  const { max, min } = config;
+  const length = toLength(value);
+  const isLteMax = gte(max);
+  if (!min) {
+    return isLteMax(length);
+  }
+  const isGteMin = lte(min);
+  return allPass([isLteMax, isGteMin])(length);
 };
 
 // eslint-disable-next-line complexity

@@ -1,4 +1,3 @@
-import { allPass, gte, lte } from '../ramda';
 import { isArray, isNumber, isString, isNil } from '.';
 
 // eslint-disable-next-line complexity
@@ -12,16 +11,5 @@ export const toLength = (value: unknown): number => {
   if (isNil(value)) {
     return 0;
   }
-  return NaN;
-};
-
-export const isValidLength = (config: { max: number; min?: number }, value: unknown): boolean => {
-  const { max, min } = config;
-  const length = toLength(value);
-  const isLteMax = gte(max);
-  if (!min) {
-    return isLteMax(length);
-  }
-  const isGteMin = lte(min);
-  return allPass([isLteMax, isGteMin])(length);
+  return Number.NaN;
 };
