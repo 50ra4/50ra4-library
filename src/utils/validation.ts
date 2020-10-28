@@ -11,7 +11,7 @@ import {
   isRegExp,
   replaceMessage,
   stringArray2EnumLikeObject,
-  toLength,
+  getLength,
 } from '.';
 
 export const EValidatorType = stringArray2EnumLikeObject([
@@ -101,7 +101,7 @@ const toMessageReplaceParameter = <T>(
 
 export const isValidLength = (config: { max: number; min?: number }, value: unknown): boolean => {
   const { max, min } = config;
-  const length = toLength(value);
+  const length = getLength(value);
   const isLteMax = gte(max);
   if (!min) {
     return isLteMax(length);
