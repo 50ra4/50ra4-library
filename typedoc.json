@@ -1,7 +1,7 @@
 {
-  "inputFiles": ["src/**/**.ts"],
+  "inputFiles": ["src/utils/index.ts", "src/types.ts"],
   "mode": "modules",
   "out": "docs",
-  "exclude": "**/*+(index|.spec|.test).ts",
+  "exclude": ["**/*+(.spec|.test).ts", "src/ramda/**"],
   "excludeNotExported": true
 }
