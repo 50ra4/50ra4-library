@@ -69,8 +69,8 @@ import forEachObjIndexed from 'ramda/src/forEachObjIndexed';
 import fromPairs from 'ramda/src/fromPairs';
 import groupBy from 'ramda/src/groupBy';
 import groupWith from 'ramda/src/groupWith';
-import gt from 'ramda/src/gt';
-import gte from 'ramda/src/gte';
+// import gt from 'ramda/src/gt';
+// import gte from 'ramda/src/gte';
 import has from 'ramda/src/has';
 import hasIn from 'ramda/src/hasIn';
 import hasPath from 'ramda/src/hasPath';
@@ -109,8 +109,8 @@ import lensPath from 'ramda/src/lensPath';
 import lensProp from 'ramda/src/lensProp';
 import lift from 'ramda/src/lift';
 import liftN from 'ramda/src/liftN';
-import lt from 'ramda/src/lt';
-import lte from 'ramda/src/lte';
+// import lt from 'ramda/src/lt';
+// import lte from 'ramda/src/lte';
 import map from 'ramda/src/map';
 import mapAccum from 'ramda/src/mapAccum';
 import mapAccumRight from 'ramda/src/mapAccumRight';
@@ -320,8 +320,8 @@ export {
   fromPairs,
   groupBy,
   groupWith,
-  gt,
-  gte,
+  // gt,
+  // gte,
   has,
   hasIn,
   hasPath,
@@ -360,8 +360,8 @@ export {
   lensProp,
   lift,
   liftN,
-  lt,
-  lte,
+  // lt,
+  // lte,
   map,
   mapAccum,
   mapAccumRight,
