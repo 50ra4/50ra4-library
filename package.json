@@ -8,7 +8,7 @@
     "test-ci": "jest -c ./jest.config.json --ci",
     "build-check": "tsc --noEmit",
     "build": "tsc",
-    "docs": "typedoc --out ./docs --target ES6 --mode file ./src"
+    "docs": "typedoc --options ./typedoc.json"
   },
   "husky": {
     "hooks": {
