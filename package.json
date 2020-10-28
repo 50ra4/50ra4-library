@@ -4,9 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest -c ./jest.config.json --watchAll",
+    "test": "jest -c ./jest.config.json --watch",
+    "test-ci": "jest -c ./jest.config.json --ci",
     "build-check": "tsc --noEmit",
     "build": "tsc"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run build-check && npm run test-ci && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
