@@ -2,12 +2,12 @@ import add from 'ramda/src/add';
 import addIndex from 'ramda/src/addIndex';
 import adjust from 'ramda/src/adjust';
 import all from 'ramda/src/all';
-import allPass from 'ramda/src/allPass';
+// import allPass from 'ramda/src/allPass';
 import always from 'ramda/src/always';
 import and from 'ramda/src/and';
 import andThen from 'ramda/src/andThen';
 import any from 'ramda/src/any';
-import anyPass from 'ramda/src/anyPass';
+// import anyPass from 'ramda/src/anyPass';
 import ap from 'ramda/src/ap';
 import aperture from 'ramda/src/aperture';
 import append from 'ramda/src/append';
@@ -29,7 +29,7 @@ import complement from 'ramda/src/complement';
 import compose from 'ramda/src/compose';
 import composeWith from 'ramda/src/composeWith';
 import concat from 'ramda/src/concat';
-import cond from 'ramda/src/cond';
+// import cond from 'ramda/src/cond';
 import construct from 'ramda/src/construct';
 import constructN from 'ramda/src/constructN';
 import converge from 'ramda/src/converge';
@@ -94,15 +94,15 @@ import invert from 'ramda/src/invert';
 import invertObj from 'ramda/src/invertObj';
 import invoker from 'ramda/src/invoker';
 import is from 'ramda/src/is';
-import isEmpty from 'ramda/src/isEmpty';
-import isNil from 'ramda/src/isNil';
+// import isEmpty from 'ramda/src/isEmpty';
+// import isNil from 'ramda/src/isNil';
 import join from 'ramda/src/join';
 import juxt from 'ramda/src/juxt';
 import keys from 'ramda/src/keys';
 import keysIn from 'ramda/src/keysIn';
 import last from 'ramda/src/last';
 import lastIndexOf from 'ramda/src/lastIndexOf';
-import length from 'ramda/src/length';
+// import length from 'ramda/src/length';
 import lens from 'ramda/src/lens';
 import lensIndex from 'ramda/src/lensIndex';
 import lensPath from 'ramda/src/lensPath';
@@ -253,12 +253,12 @@ export {
   addIndex,
   adjust,
   all,
-  allPass,
+  // allPass,
   always,
   and,
   andThen,
   any,
-  anyPass,
+  // anyPass,
   ap,
   aperture,
   append,
@@ -280,7 +280,7 @@ export {
   compose,
   composeWith,
   concat,
-  cond,
+  // cond,
   construct,
   constructN,
   converge,
@@ -345,15 +345,15 @@ export {
   invertObj,
   invoker,
   is,
-  isEmpty,
-  isNil,
+  // isEmpty,
+  // isNil,
   join,
   juxt,
   keys,
   keysIn,
   last,
   lastIndexOf,
-  length,
+  // length,
   lens,
   lensIndex,
   lensPath,
