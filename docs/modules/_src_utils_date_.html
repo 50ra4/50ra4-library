@@ -86,7 +86,7 @@
 					<div class="tsd-signature tsd-kind-icon">EDate<wbr>Format<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>dateISO<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"yyyy-MM-dd"</span><span class="tsd-signature-symbol">; </span>dateJp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"yyyy年MM月dd日"</span><span class="tsd-signature-symbol">; </span>dateTimeISO<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"yyyy-MM-dd HH:mm:ss"</span><span class="tsd-signature-symbol">; </span>timestampISO<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"yyyy-MM-dd HH:mm:ss.SSS"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = {dateISO: &#x27;yyyy-MM-dd&#x27;,dateJp: &#x27;yyyy年MM月dd日&#x27;,dateTimeISO: &#x27;yyyy-MM-dd HH:mm:ss&#x27;,timestampISO: &#x27;yyyy-MM-dd HH:mm:ss.SSS&#x27;,} as const</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/shigarashi1/50ra4-library/blob/477b023/src/utils/date.ts#L4">src/utils/date.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/shigarashi1/50ra4-library/blob/898996d/src/utils/date.ts#L4">src/utils/date.ts:4</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -113,7 +113,7 @@
 					<div class="tsd-signature tsd-kind-icon">format<wbr>Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">"dateISO"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"dateJp"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"dateTimeISO"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"timestampISO"</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">(</span>dateStr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = toPairs(EDateFormat).map((v) &#x3D;&gt; v as [DateFormatKey, DateFormat]).reduce((acc, [key, fmt]) &#x3D;&gt; ({ ...acc, [key]: format(fmt) }), //{} as Record&lt;DateFormatKey, (dateStr: string) &#x3D;&gt; Date&gt;,)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/shigarashi1/50ra4-library/blob/477b023/src/utils/date.ts#L13">src/utils/date.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/shigarashi1/50ra4-library/blob/898996d/src/utils/date.ts#L13">src/utils/date.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
