@@ -1,18 +1,10 @@
-import format from 'date-fns/fp/format';
-import { toPairs } from '../ramda';
-
 export const EDateFormat = {
+  yearMonthJP: 'yyyy年MM月',
+  monthDayJP: 'MM月dd日',
+  hourMiniteJP: 'HH時mm分',
   dateISO: 'yyyy-MM-dd',
-  dateJp: 'yyyy年MM月dd日',
+  dateJP: 'yyyy年MM月dd日',
   dateTimeISO: 'yyyy-MM-dd HH:mm:ss',
+  dateTimeJP: 'yyyy年MM月dd日 HH時mm分ss秒',
   timestampISO: 'yyyy-MM-dd HH:mm:ss.SSS',
 } as const;
-type DateFormatKey = keyof typeof EDateFormat;
-type DateFormat = typeof EDateFormat[DateFormatKey];
-
-export const formatDate = toPairs(EDateFormat)
-  .map((v) => v as [DateFormatKey, DateFormat])
-  .reduce(
-    (acc, [key, fmt]) => ({ ...acc, [key]: format(fmt) }), //
-    {} as Record<DateFormatKey, (dateStr: string) => Date>,
-  );
