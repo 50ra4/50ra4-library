@@ -15,8 +15,8 @@
     "preserveConstEnums": true,
     "noEmitHelpers": true,
     "outDir": "dist",
-    "rootDir": ".",
-    "baseUrl": "./",
+    // "rootDir": ".",
+    // "baseUrl": "./",
     "typeRoots": ["node_modules/@types", "src/types"],
     "strict": true
   },

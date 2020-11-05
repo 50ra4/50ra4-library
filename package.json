@@ -2,14 +2,23 @@
   "name": "50ra4-library",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/lib/index.js",
+  "module": "dist/es6/index.js",
+  "typings": "dist/lib/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "prepare": "npm run build",
     "test": "jest -c ./jest.config.json --watch",
     "test-ci": "jest -c ./jest.config.json --ci",
+    "clean": "rimraf ./dist",
     "build-check": "tsc --noEmit",
-    "build": "tsc",
+    "build-module": "tsc -p ./tsconfig.build.json",
+    "build-es6": "tsc -p ./tsconfig.build-es6.json",
+    "build": "npm run clean && npm run build-module && npm run build-es6",
     "touch-nojeykll": "nodetouch docs/.nojekyll",
-    "gen-doc": "typedoc --options ./typedoc.json && npm run touch-nojeykll"
+    "generate-typedoc": "typedoc --options ./typedoc.json && npm run touch-nojeykll"
   },
   "husky": {
     "hooks": {
@@ -48,7 +57,7 @@
     "lint-staged": "10.4.0",
     "prettier": "2.1.2",
     "ramda": "0.27.1",
-    "rimraf": "3.0.2",
+    "rimraf": "^3.0.2",
     "touch": "3.1.0",
     "ts-jest": "26.4.1",
     "ts-node": "9.0.0",
