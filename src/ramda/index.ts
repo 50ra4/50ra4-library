@@ -115,7 +115,7 @@ import map from 'ramda/src/map';
 import mapAccum from 'ramda/src/mapAccum';
 import mapAccumRight from 'ramda/src/mapAccumRight';
 import mapObjIndexed from 'ramda/src/mapObjIndexed';
-import match from 'ramda/src/match';
+// import match from 'ramda/src/match';
 import mathMod from 'ramda/src/mathMod';
 import max from 'ramda/src/max';
 import maxBy from 'ramda/src/maxBy';
@@ -366,7 +366,7 @@ export {
   mapAccum,
   mapAccumRight,
   mapObjIndexed,
-  match,
+  // match,
   mathMod,
   max,
   maxBy,

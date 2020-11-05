@@ -1,6 +1,6 @@
 {
   "name": "50ra4-library",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/lib/index.js",
   "module": "dist/es6/index.js",
@@ -42,6 +42,7 @@
   },
   "homepage": "https://github.com/shigarashi1/50ra4-library#readme",
   "dependencies": {
+    "@types/ramda": "0.27.25",
     "date-fns": "2.16.1",
     "fp-ts": "2.8.4",
     "ramda": "0.27.1"
@@ -49,7 +50,6 @@
   "devDependencies": {
     "@types/jest": "26.0.14",
     "@types/node": "14.11.8",
-    "@types/ramda": "0.27.25",
     "@typescript-eslint/eslint-plugin": "4.4.1",
     "@typescript-eslint/parser": "4.4.1",
     "eslint": "7.11.0",
