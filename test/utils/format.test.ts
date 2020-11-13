@@ -1,7 +1,7 @@
 import { toPairs } from '../../src/ramda';
 import { ELogLevel, formatLogMessage, replaceMessage } from '../../src/utils';
 
-describe('format.test.ts', () => {
+describe('utils/format', () => {
   describe('formatLogMessage', () => {
     it('should return LogLevel', () => {
       const levels = toPairs(ELogLevel);
