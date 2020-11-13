@@ -24,3 +24,6 @@ export const allPass = <A extends ReadonlyArray<unknown>>(fns: SafePred<A>[]) =>
 
 export const anyPass = <A extends ReadonlyArray<unknown>>(fns: SafePred<A>[]) => (...value: A): boolean =>
   fns.some((fn) => fn(...value));
+
+export const and = <A extends ReadonlyArray<boolean>>(...args: A): boolean => args.every((v) => !!v);
+export const or = <A extends ReadonlyArray<boolean>>(...args: A): boolean => args.some((v) => !!v);
