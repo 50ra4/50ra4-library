@@ -220,7 +220,7 @@ import transpose from 'ramda/src/transpose';
 import traverse from 'ramda/src/traverse';
 import trim from 'ramda/src/trim';
 import tryCatch from 'ramda/src/tryCatch';
-import type from 'ramda/src/type';
+// import type from 'ramda/src/type';
 import unapply from 'ramda/src/unapply';
 import unary from 'ramda/src/unary';
 import uncurryN from 'ramda/src/uncurryN';
@@ -471,7 +471,7 @@ export {
   traverse,
   trim,
   tryCatch,
-  type,
+  // type,
   unapply,
   unary,
   uncurryN,
