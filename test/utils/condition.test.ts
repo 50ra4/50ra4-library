@@ -1,10 +1,19 @@
 import { always } from '../../src/ramda';
-import { allPass, anyPass, cond, match } from '../../src/utils';
+import { allPass, and, anyPass, cond, match, or } from '../../src/utils';
 
 const mod = (n: number) => n % 2 === 0;
 const odd = (n: number) => n % 2 === 1;
 const multiple3 = (n: number) => n % 3 === 0;
 const multiple6 = (n: number) => n % 6 === 0;
+
+const HttpStatusCode = {
+  400: 'Bad Request',
+  401: 'Unauthorized',
+  403: 'Forbidden',
+  404: 'Not Found',
+} as const;
+const equals = (statusCode: keyof typeof HttpStatusCode) => (n: number) => statusCode === n;
+const getMessage = (n: number): string => HttpStatusCode[n] || '';
 
 describe('utils/condition', () => {
   describe('allPass', () => {
@@ -36,15 +45,6 @@ describe('utils/condition', () => {
       });
     });
   });
-
-  const HttpStatusCode = {
-    400: 'Bad Request',
-    401: 'Unauthorized',
-    403: 'Forbidden',
-    404: 'Not Found',
-  } as const;
-  const equals = (statusCode: keyof typeof HttpStatusCode) => (n: number) => statusCode === n;
-  const getMessage = (n: number): string => HttpStatusCode[n] || '';
 
   describe('cond', () => {
     const TEST_VALUE = [400, 401, 402, 403, 404];
@@ -86,6 +86,40 @@ describe('utils/condition', () => {
       TEST_VALUE.filter((v) => v === 402).forEach((v) => {
         expect(testFn(v)).toBe(DEFAULT_MESSAGE);
       });
+    });
+  });
+
+  describe('and', () => {
+    it('should return true', () => {
+      expect(and(true)).toBeTruthy();
+      expect(and(true, true)).toBeTruthy();
+      expect(and(true, true, true)).toBeTruthy();
+      expect(and(true, true, true, true)).toBeTruthy();
+      expect(and(true, true, true, true, true)).toBeTruthy();
+    });
+    it('should return false', () => {
+      expect(and(false)).toBeFalsy();
+      expect(and(true, false)).toBeFalsy();
+      expect(and(true, true, false)).toBeFalsy();
+      expect(and(true, true, true, false)).toBeFalsy();
+      expect(and(true, true, true, true, false)).toBeFalsy();
+    });
+  });
+
+  describe('or', () => {
+    it('should return true', () => {
+      expect(or(true)).toBeTruthy();
+      expect(or(true, false)).toBeTruthy();
+      expect(or(true, false, false)).toBeTruthy();
+      expect(or(false, false, true, false)).toBeTruthy();
+      expect(or(false, false, false, false, true)).toBeTruthy();
+    });
+    it('should return false', () => {
+      expect(or(false)).toBeFalsy();
+      expect(or(false, false)).toBeFalsy();
+      expect(or(false, false, false)).toBeFalsy();
+      expect(or(false, false, false, false)).toBeFalsy();
+      expect(or(false, false, false, false, false)).toBeFalsy();
     });
   });
 });

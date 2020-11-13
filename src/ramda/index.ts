@@ -4,7 +4,7 @@ import adjust from 'ramda/src/adjust';
 import all from 'ramda/src/all';
 // import allPass from 'ramda/src/allPass';
 import always from 'ramda/src/always';
-import and from 'ramda/src/and';
+// import and from 'ramda/src/and';
 import andThen from 'ramda/src/andThen';
 import any from 'ramda/src/any';
 // import anyPass from 'ramda/src/anyPass';
@@ -147,7 +147,7 @@ import objOf from 'ramda/src/objOf';
 import of from 'ramda/src/of';
 import omit from 'ramda/src/omit';
 import once from 'ramda/src/once';
-import or from 'ramda/src/or';
+// import or from 'ramda/src/or';
 import otherwise from 'ramda/src/otherwise';
 import over from 'ramda/src/over';
 import pair from 'ramda/src/pair';
@@ -255,7 +255,7 @@ export {
   all,
   // allPass,
   always,
-  and,
+  // and,
   andThen,
   any,
   // anyPass,
@@ -398,7 +398,7 @@ export {
   of,
   omit,
   once,
-  or,
+  // or,
   otherwise,
   over,
   pair,

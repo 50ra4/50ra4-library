@@ -1,6 +1,6 @@
 import { lt, lte, gt, gte } from '../../src/utils';
 
-describe('relation', () => {
+describe('utils/relation', () => {
   it('lt', () => {
     const lt3 = lt(3);
     expect(lt3(1)).toBeTruthy();
