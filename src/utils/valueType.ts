@@ -35,7 +35,7 @@ const __getObjectType = (value: object | null): ValueType => {
   return EValueType.object;
 };
 
-export const getValueType = (value: unknown): ValueType => {
+export const typeOf = (value: unknown): ValueType => {
   switch (typeof value) {
     case 'string':
       return EValueType.string;
