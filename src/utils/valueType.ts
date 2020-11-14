@@ -19,7 +19,7 @@ export const EValueType = stringArray2EnumLikeObject([
 ]);
 export type ValueType = typeof EValueType[keyof typeof EValueType];
 
-const __getObjectType = (value: object | null): ValueType => {
+const getObjectType = (value: object | null): ValueType => {
   if (value === null) {
     return EValueType.null;
   }
@@ -52,11 +52,11 @@ export const typeOf = (value: unknown): ValueType => {
     case 'bigint':
       return EValueType.bigint;
     case 'object':
-      return __getObjectType(value);
+      return getObjectType(value);
     default:
       return EValueType.unknown;
   }
 };
 
-const NullValueType: ReadonlyArray<ValueType> = [EValueType.undefined, EValueType.null];
-export const isNillValueType = (v: ValueType) => NullValueType.includes(v);
+const NullableValueType: ReadonlyArray<ValueType> = [EValueType.undefined, EValueType.null];
+export const isNillableType = (v: ValueType) => NullableValueType.includes(v);

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { propEq, toPairs, equals } from '../ramda';
 import { IndexedObject } from '../types';
-import { EValueType, typeOf, ValueType, isNillValueType, anyPass } from '.';
+import { EValueType, typeOf, ValueType, isNillableType, anyPass } from '.';
 import { flow } from 'fp-ts/lib/function';
 
 /**
@@ -10,7 +10,7 @@ import { flow } from 'fp-ts/lib/function';
  */
 export const isEnum = <T>(fromEnum: IndexedObject<T>) => (x: unknown): x is T => toPairs(fromEnum).some(propEq('1', x));
 
-export const isNil = (x: unknown): x is undefined | null => flow(typeOf, isNillValueType)(x);
+export const isNil = (x: unknown): x is undefined | null => flow(typeOf, isNillableType)(x);
 export const isNonNullable = <T = unknown>(x: T): x is NonNullable<T> => !isNil(x);
 
 const valueTypeEq = (x: unknown, valueType: ValueType) => flow(typeOf, equals(valueType))(x);
