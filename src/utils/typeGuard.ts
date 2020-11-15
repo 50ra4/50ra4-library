@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { propEq, toPairs, equals } from '../ramda';
 import { IndexedObject } from '../types';
-import { EValueType, typeOf, ValueType, isNillableType, anyPass } from '.';
+import { EValueType, typeOf, ValueType, anyPass } from '.';
 import { flow } from 'fp-ts/lib/function';
 
 /**
@@ -9,9 +9,6 @@ import { flow } from 'fp-ts/lib/function';
  * @param fromEnum EnumライクなObject
  */
 export const isEnum = <T>(fromEnum: IndexedObject<T>) => (x: unknown): x is T => toPairs(fromEnum).some(propEq('1', x));
-
-export const isNil = (x: unknown): x is undefined | null => flow(typeOf, isNillableType)(x);
-export const isNonNullable = <T = unknown>(x: T): x is NonNullable<T> => !isNil(x);
 
 const valueTypeEq = (x: unknown, valueType: ValueType) => flow(typeOf, equals(valueType))(x);
 export const isString = (x: unknown): x is string => valueTypeEq(x, EValueType.string);
@@ -22,6 +19,10 @@ export const isDate = (x: unknown): x is Date => valueTypeEq(x, EValueType.date)
 export const isObject = (x: unknown): x is object => valueTypeEq(x, EValueType.object);
 export const isArray = <T = unknown>(x: unknown): x is T[] => valueTypeEq(x, EValueType.array);
 export const isRegExp = (x: unknown): x is RegExp => valueTypeEq(x, EValueType.regExp);
+export const isNull = (x: unknown): x is null => valueTypeEq(x, EValueType.null);
+export const isUndefined = (x: unknown): x is undefined => valueTypeEq(x, EValueType.undefined);
+export const isNil = (x: unknown): x is undefined | null => anyPass([isNull, isUndefined])(x);
+export const isNonNullable = <T = unknown>(x: T): x is NonNullable<T> => !isNil(x);
 
 export const isEmptyString = (x: unknown): x is '' => isString(x) && equals(x, '');
 export const isEmptyObject = (x: unknown): x is {} => isObject(x) && equals(x, {});
