@@ -42,9 +42,11 @@
   },
   "homepage": "https://github.com/shigarashi1/50ra4-library#readme",
   "dependencies": {
+    "@types/lodash.partial": "4.2.6",
     "@types/ramda": "0.27.25",
     "date-fns": "2.16.1",
     "fp-ts": "2.8.4",
+    "lodash.partial": "4.2.1",
     "ramda": "0.27.1"
   },
   "devDependencies": {
