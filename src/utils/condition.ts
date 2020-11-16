@@ -14,10 +14,10 @@ export const cond = <A extends ReadonlyArray<unknown>, B>(fns: CondFns<A, B>[]) 
 export const condAll = <A extends ReadonlyArray<unknown>, B>(fns: CondFns<A, B>[]) => (...params: A): B[] =>
   fns.filter(([pred]) => pred(...params)).map(([, transform]) => transform(...params));
 
-export const match = <A extends ReadonlyArray<unknown>, B>(
-  onDefault: (...params: A) => B, //
+export const match = <A extends ReadonlyArray<unknown>, B, C>(
+  onDefault: (...params: A) => C, //
   fns: CondFns<A, B>[],
-) => (...params: A): B => cond(fns)(...params) || onDefault(...params);
+) => (...params: A): B | C => cond(fns)(...params) || onDefault(...params);
 
 export const allPass = <A extends ReadonlyArray<unknown>>(fns: SafePred<A>[]) => (...value: A): boolean =>
   fns.every((fn) => fn(...value));

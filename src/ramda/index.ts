@@ -213,14 +213,14 @@ import times from 'ramda/src/times';
 import toLower from 'ramda/src/toLower';
 import toPairs from 'ramda/src/toPairs';
 import toPairsIn from 'ramda/src/toPairsIn';
-import toString from 'ramda/src/toString';
+// import toString from 'ramda/src/toString';
 import toUpper from 'ramda/src/toUpper';
 import transduce from 'ramda/src/transduce';
 import transpose from 'ramda/src/transpose';
 import traverse from 'ramda/src/traverse';
 import trim from 'ramda/src/trim';
 import tryCatch from 'ramda/src/tryCatch';
-import type from 'ramda/src/type';
+// import type from 'ramda/src/type';
 import unapply from 'ramda/src/unapply';
 import unary from 'ramda/src/unary';
 import uncurryN from 'ramda/src/uncurryN';
@@ -464,14 +464,14 @@ export {
   toLower,
   toPairs,
   toPairsIn,
-  toString,
+  // toString,
   toUpper,
   transduce,
   transpose,
   traverse,
   trim,
   tryCatch,
-  type,
+  // type,
   unapply,
   unary,
   uncurryN,

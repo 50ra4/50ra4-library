@@ -1,6 +1,4 @@
-/* eslint-disable complexity */
-/* eslint-disable @typescript-eslint/ban-types */
-import { stringArray2EnumLikeObject } from '.';
+import { stringArray2EnumLikeObject } from './enum';
 
 export const EValueType = stringArray2EnumLikeObject([
   'string',
@@ -19,7 +17,8 @@ export const EValueType = stringArray2EnumLikeObject([
 ]);
 export type ValueType = typeof EValueType[keyof typeof EValueType];
 
-const __getObjectType = (value: object | null): ValueType => {
+// eslint-disable-next-line @typescript-eslint/ban-types, complexity
+const getObjectType = (value: object | null): ValueType => {
   if (value === null) {
     return EValueType.null;
   }
@@ -35,7 +34,8 @@ const __getObjectType = (value: object | null): ValueType => {
   return EValueType.object;
 };
 
-export const getValueType = (value: unknown): ValueType => {
+// eslint-disable-next-line complexity
+export const typeOf = (value: unknown): ValueType => {
   switch (typeof value) {
     case 'string':
       return EValueType.string;
@@ -52,11 +52,8 @@ export const getValueType = (value: unknown): ValueType => {
     case 'bigint':
       return EValueType.bigint;
     case 'object':
-      return __getObjectType(value);
+      return getObjectType(value);
     default:
       return EValueType.unknown;
   }
 };
-
-const NullValueType: ReadonlyArray<ValueType> = [EValueType.undefined, EValueType.null];
-export const isNillValueType = (v: ValueType) => NullValueType.includes(v);
