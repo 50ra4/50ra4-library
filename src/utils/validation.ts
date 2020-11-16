@@ -1,4 +1,4 @@
-import { hasPath, omit, path, pick, toPairs, toString } from '../ramda';
+import { hasPath, omit, path, pick, toPairs } from '../ramda';
 import { Nullable, ReadonlyPartial } from '../types';
 import {
   allPass,
@@ -14,6 +14,7 @@ import {
   getLength,
   gte,
   lte,
+  toString,
 } from '.';
 
 export const EValidatorType = stringArray2EnumLikeObject([
