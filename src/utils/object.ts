@@ -8,8 +8,8 @@ export const keys = <V extends ObjectType>(obj: V): ReadonlyArray<keyof V> => {
   return Object.keys(obj) as (keyof V)[];
 };
 
-export const values = <V extends ObjectType>(obj: V): ReadonlyArray<V[keyof V]> => {
-  return Object.values(obj) as V[keyof V][];
+export const values = <V extends ObjectType, K extends keyof V>(obj: V): ReadonlyArray<V[K]> => {
+  return Object.values(obj) as V[K][];
 };
 
 export const pick = <K extends ObjectKeyType, T extends ObjectType<K>>(keys: K[], obj: T): Readonly<Pick<T, K>> => {

@@ -1,4 +1,4 @@
-import { hasPath, omit, path, pick, toPairs } from '../ramda';
+import { hasPath, path } from '../ramda';
 import { Nullable, ReadonlyPartial } from '../types';
 import {
   allPass,
@@ -15,6 +15,9 @@ import {
   gte,
   lte,
   toString,
+  pick,
+  omit,
+  toPairs,
 } from '.';
 
 export const EValidatorType = stringArray2EnumLikeObject([
@@ -150,8 +153,8 @@ const customizeValueValidator = <T>(
   }
   const [option, types] = customConfig;
   return option === 'pick' //
-    ? pick(types, validatorConfig)
-    : omit(types, validatorConfig);
+    ? pick(types, validatorConfig as Required<typeof validatorConfig>)
+    : omit(types, validatorConfig as Required<typeof validatorConfig>);
 };
 
 export const valueValidator = <T>(validatorConfig: ValueValidatorConfig<T>) => (

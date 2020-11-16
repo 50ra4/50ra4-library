@@ -1,4 +1,5 @@
-import { toPairs, find, pathEq } from '../ramda';
+import { toPairs } from '.';
+import { find, pathEq } from '../ramda';
 import { IndexedObject } from '../types';
 import { isEnum } from './typeGuard';
 

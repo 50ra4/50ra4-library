@@ -1,7 +1,5 @@
-import { LogLevel } from '.';
 import format from 'date-fns/format';
-import { toPairs } from '../ramda';
-import { EDateFormat } from './date';
+import { LogLevel, toPairs, EDateFormat } from '.';
 import {
   isArray,
   isBigint,

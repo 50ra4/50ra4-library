@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { formatLogMessage } from '.';
-import { partial, toPairs, values } from '../ramda';
+import { formatLogMessage, toPairs } from '.';
+import { partial } from '../ramda';
 
 export const ELogLevel = {
   debug: 'DEBUG',
@@ -19,7 +19,13 @@ const Console = {
   [ELogLevel.debug]: console.debug,
 } as const;
 
-const LoggerLevels: ReadonlyArray<LogLevel> = values(ELogLevel);
+const LoggerLevels: ReadonlyArray<LogLevel> = [
+  ELogLevel.error,
+  ELogLevel.warn,
+  ELogLevel.info,
+  ELogLevel.log,
+  ELogLevel.debug,
+];
 const shouldOutputLogLevel = (targetLevel: LogLevel, level: LogLevel): boolean => {
   const targetIndex = LoggerLevels.indexOf(targetLevel);
   const index = LoggerLevels.indexOf(level);
