@@ -1,5 +1,5 @@
 import { toPairs } from '.';
-import { find, pathEq } from '../ramda';
+import { find, pathEq } from '../external/ramda';
 import { IndexedObject } from '../types';
 import { isEnum } from './typeGuard';
 

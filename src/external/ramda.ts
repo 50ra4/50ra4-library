@@ -151,7 +151,7 @@ import once from 'ramda/src/once';
 import otherwise from 'ramda/src/otherwise';
 import over from 'ramda/src/over';
 import pair from 'ramda/src/pair';
-import partial from 'ramda/src/partial';
+// import partial from 'ramda/src/partial';
 import partialRight from 'ramda/src/partialRight';
 import partition from 'ramda/src/partition';
 import path from 'ramda/src/path';
@@ -402,7 +402,7 @@ export {
   otherwise,
   over,
   pair,
-  partial,
+  // partial,
   partialRight,
   partition,
   path,

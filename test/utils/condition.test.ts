@@ -1,4 +1,4 @@
-import { always } from '../../src/ramda';
+import { always } from '../../src';
 import { allPass, and, anyPass, cond, match, or } from '../../src/utils';
 
 const mod = (n: number) => n % 2 === 0;

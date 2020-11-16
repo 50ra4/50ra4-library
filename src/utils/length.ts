@@ -1,4 +1,4 @@
-import { hasPath } from '../ramda';
+import { hasPath } from '../external/ramda';
 import { isArray, isNumber, isString, isNil } from '.';
 
 const hasLengthProp = (x: unknown): x is Record<'length', unknown> => hasPath(['length'], x);

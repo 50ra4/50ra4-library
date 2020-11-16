@@ -1,6 +1,6 @@
 import isBefore from 'date-fns/fp/isBefore';
 import parseISO from 'date-fns/fp/parseISO';
-import { repeat } from '../../src/ramda';
+import { repeat } from '../../src';
 
 import {
   ValueValidatorConfig,

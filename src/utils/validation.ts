@@ -1,4 +1,4 @@
-import { hasPath, path } from '../ramda';
+import { hasPath, path } from '../external/ramda';
 import { Nullable, ReadonlyPartial } from '../types';
 import {
   allPass,
