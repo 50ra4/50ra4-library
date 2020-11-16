@@ -213,7 +213,7 @@ import times from 'ramda/src/times';
 import toLower from 'ramda/src/toLower';
 import toPairs from 'ramda/src/toPairs';
 import toPairsIn from 'ramda/src/toPairsIn';
-import toString from 'ramda/src/toString';
+// import toString from 'ramda/src/toString';
 import toUpper from 'ramda/src/toUpper';
 import transduce from 'ramda/src/transduce';
 import transpose from 'ramda/src/transpose';
@@ -464,7 +464,7 @@ export {
   toLower,
   toPairs,
   toPairsIn,
-  toString,
+  // toString,
   toUpper,
   transduce,
   transpose,
