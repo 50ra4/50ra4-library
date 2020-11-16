@@ -98,7 +98,7 @@ import is from 'ramda/src/is';
 // import isNil from 'ramda/src/isNil';
 import join from 'ramda/src/join';
 import juxt from 'ramda/src/juxt';
-import keys from 'ramda/src/keys';
+// import keys from 'ramda/src/keys';
 import keysIn from 'ramda/src/keysIn';
 import last from 'ramda/src/last';
 import lastIndexOf from 'ramda/src/lastIndexOf';
@@ -145,7 +145,7 @@ import nthArg from 'ramda/src/nthArg';
 import o from 'ramda/src/o';
 import objOf from 'ramda/src/objOf';
 import of from 'ramda/src/of';
-import omit from 'ramda/src/omit';
+// import omit from 'ramda/src/omit';
 import once from 'ramda/src/once';
 // import or from 'ramda/src/or';
 import otherwise from 'ramda/src/otherwise';
@@ -159,7 +159,7 @@ import pathEq from 'ramda/src/pathEq';
 import pathOr from 'ramda/src/pathOr';
 import pathSatisfies from 'ramda/src/pathSatisfies';
 import paths from 'ramda/src/paths';
-import pick from 'ramda/src/pick';
+// import pick from 'ramda/src/pick';
 import pickAll from 'ramda/src/pickAll';
 import pickBy from 'ramda/src/pickBy';
 import pipe from 'ramda/src/pipe';
@@ -168,7 +168,7 @@ import pluck from 'ramda/src/pluck';
 import prepend from 'ramda/src/prepend';
 import product from 'ramda/src/product';
 import project from 'ramda/src/project';
-import prop from 'ramda/src/prop';
+// import prop from 'ramda/src/prop';
 import propEq from 'ramda/src/propEq';
 import propIs from 'ramda/src/propIs';
 import propOr from 'ramda/src/propOr';
@@ -211,7 +211,7 @@ import test from 'ramda/src/test';
 import thunkify from 'ramda/src/thunkify';
 import times from 'ramda/src/times';
 import toLower from 'ramda/src/toLower';
-import toPairs from 'ramda/src/toPairs';
+// import toPairs from 'ramda/src/toPairs';
 import toPairsIn from 'ramda/src/toPairsIn';
 // import toString from 'ramda/src/toString';
 import toUpper from 'ramda/src/toUpper';
@@ -235,7 +235,7 @@ import unnest from 'ramda/src/unnest';
 import until from 'ramda/src/until';
 import update from 'ramda/src/update';
 import useWith from 'ramda/src/useWith';
-import values from 'ramda/src/values';
+// import values from 'ramda/src/values';
 import valuesIn from 'ramda/src/valuesIn';
 import view from 'ramda/src/view';
 import when from 'ramda/src/when';
@@ -349,7 +349,7 @@ export {
   // isNil,
   join,
   juxt,
-  keys,
+  // keys,
   keysIn,
   last,
   lastIndexOf,
@@ -396,7 +396,7 @@ export {
   o,
   objOf,
   of,
-  omit,
+  // omit,
   once,
   // or,
   otherwise,
@@ -410,7 +410,7 @@ export {
   pathOr,
   pathSatisfies,
   paths,
-  pick,
+  // pick,
   pickAll,
   pickBy,
   pipe,
@@ -419,7 +419,7 @@ export {
   prepend,
   product,
   project,
-  prop,
+  // prop,
   propEq,
   propIs,
   propOr,
@@ -462,7 +462,7 @@ export {
   thunkify,
   times,
   toLower,
-  toPairs,
+  // toPairs,
   toPairsIn,
   // toString,
   toUpper,
@@ -486,7 +486,7 @@ export {
   until,
   update,
   useWith,
-  values,
+  // values,
   valuesIn,
   view,
   when,

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { propEq, toPairs, equals } from '../ramda';
+import { propEq, equals } from '../ramda';
 import { IndexedObject } from '../types';
-import { EValueType, typeOf, ValueType, anyPass } from '.';
+import { EValueType, typeOf, ValueType, anyPass, toPairs } from '.';
 import { flow } from 'fp-ts/lib/function';
 
 /**

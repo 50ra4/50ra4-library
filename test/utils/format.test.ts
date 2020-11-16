@@ -1,6 +1,5 @@
 import { parseISO } from 'date-fns/fp';
-import { toPairs } from '../../src/ramda';
-import { ELogLevel, EValueType, formatLogMessage, replaceMessage, toString, ValueType } from '../../src/utils';
+import { ELogLevel, EValueType, formatLogMessage, replaceMessage, toPairs, toString, ValueType } from '../../src/utils';
 
 describe('utils/format', () => {
   describe('formatLogMessage', () => {
