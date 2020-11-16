@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { formatLogMessage, toPairs } from '.';
-import { partial } from '../ramda';
+import { partial } from '../external';
 
 export const ELogLevel = {
   debug: 'DEBUG',
@@ -45,7 +45,7 @@ export const CustomLogger = (options?: CustomLoggerOption): Record<keyof typeof 
   toPairs(ELogLevel).reduce(
     (acc, [key, value]) => ({
       ...acc,
-      [key]: shouldOutputLogLevel(options?.target ?? ELogLevel.info, value) ? partial(logger, [value]) : dummyLogger,
+      [key]: shouldOutputLogLevel(options?.target ?? ELogLevel.info, value) ? partial(logger, value) : dummyLogger,
     }),
     {} as Record<keyof typeof ELogLevel, Logger>,
   );
