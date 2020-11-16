@@ -13,6 +13,8 @@ export const isEnum = <T>(fromEnum: IndexedObject<T>) => (x: unknown): x is T =>
 const valueTypeEq = (x: unknown, valueType: ValueType) => flow(typeOf, equals(valueType))(x);
 export const isString = (x: unknown): x is string => valueTypeEq(x, EValueType.string);
 export const isNumber = (x: unknown): x is number => valueTypeEq(x, EValueType.number);
+export const isSymbol = (x: unknown): x is symbol => valueTypeEq(x, EValueType.symbol);
+export const isBigint = (x: unknown): x is symbol => valueTypeEq(x, EValueType.bigint);
 export const isBoolean = (x: unknown): x is boolean => valueTypeEq(x, EValueType.boolean);
 export const isFunction = (x: unknown): x is Function => valueTypeEq(x, EValueType.function);
 export const isDate = (x: unknown): x is Date => valueTypeEq(x, EValueType.date);
