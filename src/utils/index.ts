@@ -9,3 +9,4 @@ export * from './date';
 export * from './validation';
 export * from './condition';
 export * from './relation';
+export * from './object';
