@@ -77,7 +77,7 @@ import hasPath from 'ramda/src/hasPath';
 import head from 'ramda/src/head';
 import identical from 'ramda/src/identical';
 import identity from 'ramda/src/identity';
-import ifElse from 'ramda/src/ifElse';
+// import ifElse from 'ramda/src/ifElse';
 import inc from 'ramda/src/inc';
 import includes from 'ramda/src/includes';
 import index from 'ramda/src/index';
@@ -328,7 +328,7 @@ export {
   head,
   identical,
   identity,
-  ifElse,
+  // ifElse,
   inc,
   includes,
   index,

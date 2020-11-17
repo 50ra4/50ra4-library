@@ -1,10 +1,12 @@
 import { always } from '../../src';
-import { allPass, and, anyPass, cond, match, or } from '../../src/utils';
+import { allPass, and, anyPass, cond, getOrElse, ifElse, match, or } from '../../src/utils';
 
 const mod = (n: number) => n % 2 === 0;
 const odd = (n: number) => n % 2 === 1;
 const multiple3 = (n: number) => n % 3 === 0;
 const multiple6 = (n: number) => n % 6 === 0;
+const inc = (n: number) => n + 1;
+const dec = (n: number) => n - 1;
 
 const HttpStatusCode = {
   400: 'Bad Request',
@@ -120,6 +122,39 @@ describe('utils/condition', () => {
       expect(or(false, false, false)).toBeFalsy();
       expect(or(false, false, false, false)).toBeFalsy();
       expect(or(false, false, false, false, false)).toBeFalsy();
+    });
+  });
+
+  describe('ifElse', () => {
+    const TEST_VALUE = [1, 2, 3, 4, 5, 6];
+    const testFn = ifElse(mod, inc, dec);
+    it('should return onTrue result', () => {
+      TEST_VALUE.filter(mod).map((n) => {
+        expect(inc(n)).toBe(testFn(n));
+      });
+    });
+    it('should return onFalse result', () => {
+      TEST_VALUE.filter(odd).map((n) => {
+        expect(dec(n)).toBe(testFn(n));
+      });
+    });
+  });
+
+  describe('getOrElse', () => {
+    it('should return value', () => {
+      expect('1').toEqual(getOrElse(always('2'), '1'));
+      expect(1).toEqual(getOrElse(always(2), 1));
+      expect({ a: '1', b: 1 }).toEqual(getOrElse(always({ a: '2', b: 2 }), { a: '1', b: 1 }));
+    });
+    it('should return onNil return', () => {
+      expect('2').toEqual(getOrElse(always('2'), null));
+      expect(1).toEqual(getOrElse(always(1), undefined));
+    });
+    it('should work carry', () => {
+      const orString = getOrElse(always('string'));
+      expect('number').toEqual(orString('number'));
+      expect('string').toEqual(orString(undefined));
+      expect('string').toEqual(orString(null));
     });
   });
 });
