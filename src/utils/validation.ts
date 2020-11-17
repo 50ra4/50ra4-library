@@ -153,8 +153,8 @@ const customizeValueValidator = <T>(
   }
   const [option, types] = customConfig;
   return option === 'pick' //
-    ? pick(types, validatorConfig as Required<typeof validatorConfig>)
-    : omit(types, validatorConfig as Required<typeof validatorConfig>);
+    ? pick(types, validatorConfig)
+    : omit(types, validatorConfig);
 };
 
 export const valueValidator = <T>(validatorConfig: ValueValidatorConfig<T>) => (
