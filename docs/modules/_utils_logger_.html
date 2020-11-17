@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;src/utils/logger&quot; | 50ra4-library</title>
+	<title>&quot;utils/logger&quot; | 50ra4-library</title>
 	<meta name="description" content="Documentation for 50ra4-library">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_src_utils_logger_.html">&quot;src/utils/logger&quot;</a>
+					<a href="_utils_logger_.html">&quot;utils/logger&quot;</a>
 				</li>
 			</ul>
-			<h1>Module &quot;src/utils/logger&quot;</h1>
+			<h1>Module &quot;utils/logger&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -69,40 +69,48 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-external">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-is-external"><a href="_utils_logger_.html#loglevel" class="tsd-kind-icon">Log<wbr>Level</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-external"><a href="_src_utils_logger_.html#customlogger" class="tsd-kind-icon">Custom<wbr>Logger</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-external"><a href="_src_utils_logger_.html#eloglevel" class="tsd-kind-icon">ELog<wbr>Level</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-external"><a href="_utils_logger_.html#eloglevel" class="tsd-kind-icon">ELog<wbr>Level</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_src_utils_logger_.html#__formatlogmessage" class="tsd-kind-icon">__format<wbr>Log<wbr>Message</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_utils_logger_.html#customlogger" class="tsd-kind-icon">Custom<wbr>Logger</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-external">
-					<a name="customlogger" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> Custom<wbr>Logger</h3>
-					<div class="tsd-signature tsd-kind-icon">Custom<wbr>Logger<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">typeof </span><a href="_src_utils_logger_.html#eloglevel" class="tsd-signature-type">ELogLevel</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Logger</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = toPairs(ELogLevel).reduce((acc, [key, value]) &#x3D;&gt; ({ ...acc, [key]: partial(_logger, [value]) }),{} as Record&lt;keyof typeof ELogLevel, Logger&gt;,)</span></div>
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-is-external">
+					<a name="loglevel" class="tsd-anchor"></a>
+					<h3>Log<wbr>Level</h3>
+					<div class="tsd-signature tsd-kind-icon">Log<wbr>Level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">ELogLevel</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">ELogLevel</span><span class="tsd-signature-symbol">]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/shigarashi1/50ra4-library/blob/898996d/src/utils/logger.ts#L31">src/utils/logger.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/shigarashi1/50ra4-library/blob/ae296ad/src/utils/logger.ts#L12">src/utils/logger.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-external">
 					<a name="eloglevel" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> ELog<wbr>Level</h3>
-					<div class="tsd-signature tsd-kind-icon">ELog<wbr>Level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>debug<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"DEBUG"</span><span class="tsd-signature-symbol">; </span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"ERROR"</span><span class="tsd-signature-symbol">; </span>info<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"INFO"</span><span class="tsd-signature-symbol">; </span>log<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"LOG"</span><span class="tsd-signature-symbol">; </span>warn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"WARN"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = {debug: &#x27;DEBUG&#x27;,info: &#x27;INFO&#x27;,log: &#x27;LOG&#x27;,warn: &#x27;WARN&#x27;,error: &#x27;ERROR&#x27;,} as const</span></div>
+					<div class="tsd-signature tsd-kind-icon">ELog<wbr>Level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>debug<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"DEBUG"</span><span class="tsd-signature-symbol">; </span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"ERROR"</span><span class="tsd-signature-symbol">; </span>info<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"INFO"</span><span class="tsd-signature-symbol">; </span>log<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"LOG"</span><span class="tsd-signature-symbol">; </span>warn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"WARN"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = {debug: &#x27;DEBUG&#x27;,log: &#x27;LOG&#x27;,info: &#x27;INFO&#x27;,warn: &#x27;WARN&#x27;,error: &#x27;ERROR&#x27;,} as const</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/shigarashi1/50ra4-library/blob/898996d/src/utils/logger.ts#L5">src/utils/logger.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/shigarashi1/50ra4-library/blob/ae296ad/src/utils/logger.ts#L5">src/utils/logger.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -130,28 +138,25 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-external">
-					<a name="__formatlogmessage" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> __format<wbr>Log<wbr>Message</h3>
+					<a name="customlogger" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> Custom<wbr>Logger</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">__format<wbr>Log<wbr>Message<span class="tsd-signature-symbol">(</span>logLevel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TLogLevel</span>, message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">Custom<wbr>Logger<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">CustomLoggerOption</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">typeof </span><a href="_utils_logger_.html#eloglevel" class="tsd-signature-type">ELogLevel</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Logger</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/shigarashi1/50ra4-library/blob/898996d/src/utils/logger.ts#L16">src/utils/logger.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/shigarashi1/50ra4-library/blob/ae296ad/src/utils/logger.ts#L44">src/utils/logger.ts:44</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>logLevel: <span class="tsd-signature-type">TLogLevel</span></h5>
-								</li>
-								<li>
-									<h5>message: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">CustomLoggerOption</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">typeof </span><a href="_utils_logger_.html#eloglevel" class="tsd-signature-type">ELogLevel</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Logger</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -167,59 +172,71 @@
 						<span>Internals</span>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="_src_types_.html">&quot;src/types&quot;</a>
+						<a href="_types_.html">&quot;types&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="_src_utils_index_.html">&quot;src/utils/index&quot;</a>
+						<a href="_utils_index_.html">&quot;utils/index&quot;</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
 					</li>
 					<li class=" tsd-kind-module tsd-is-external">
-						<a href="_src_utils_condition_.html">&quot;src/utils/condition&quot;</a>
+						<a href="_external_index_.html">&quot;external/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-module tsd-is-external">
-						<a href="_src_utils_date_.html">&quot;src/utils/date&quot;</a>
+						<a href="_external_lodash_.html">&quot;external/lodash&quot;</a>
 					</li>
 					<li class=" tsd-kind-module tsd-is-external">
-						<a href="_src_utils_enum_.html">&quot;src/utils/enum&quot;</a>
+						<a href="_external_ramda_.html">&quot;external/ramda&quot;</a>
 					</li>
 					<li class=" tsd-kind-module tsd-is-external">
-						<a href="_src_utils_format_.html">&quot;src/utils/format&quot;</a>
+						<a href="_utils_condition_.html">&quot;utils/condition&quot;</a>
 					</li>
 					<li class=" tsd-kind-module tsd-is-external">
-						<a href="_src_utils_length_.html">&quot;src/utils/length&quot;</a>
+						<a href="_utils_date_.html">&quot;utils/date&quot;</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="_utils_enum_.html">&quot;utils/enum&quot;</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="_utils_format_.html">&quot;utils/format&quot;</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="_utils_length_.html">&quot;utils/length&quot;</a>
 					</li>
 					<li class="current tsd-kind-module tsd-is-external">
-						<a href="_src_utils_logger_.html">&quot;src/utils/logger&quot;</a>
+						<a href="_utils_logger_.html">&quot;utils/logger&quot;</a>
 					</li>
 					<li class=" tsd-kind-module tsd-is-external">
-						<a href="_src_utils_lookup_.html">&quot;src/utils/lookup&quot;</a>
+						<a href="_utils_lookup_.html">&quot;utils/lookup&quot;</a>
 					</li>
 					<li class=" tsd-kind-module tsd-is-external">
-						<a href="_src_utils_relation_.html">&quot;src/utils/relation&quot;</a>
+						<a href="_utils_object_.html">&quot;utils/object&quot;</a>
 					</li>
 					<li class=" tsd-kind-module tsd-is-external">
-						<a href="_src_utils_typeguard_.html">&quot;src/utils/type<wbr>Guard&quot;</a>
+						<a href="_utils_relation_.html">&quot;utils/relation&quot;</a>
 					</li>
 					<li class=" tsd-kind-module tsd-is-external">
-						<a href="_src_utils_validation_.html">&quot;src/utils/validation&quot;</a>
+						<a href="_utils_typeguard_.html">&quot;utils/type<wbr>Guard&quot;</a>
 					</li>
 					<li class=" tsd-kind-module tsd-is-external">
-						<a href="_src_utils_valuetype_.html">&quot;src/utils/value<wbr>Type&quot;</a>
+						<a href="_utils_validation_.html">&quot;utils/validation&quot;</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="_utils_valuetype_.html">&quot;utils/value<wbr>Type&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-external">
-						<a href="_src_utils_logger_.html#customlogger" class="tsd-kind-icon">Custom<wbr>Logger</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-external">
+						<a href="_utils_logger_.html#loglevel" class="tsd-kind-icon">Log<wbr>Level</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-external">
-						<a href="_src_utils_logger_.html#eloglevel" class="tsd-kind-icon">ELog<wbr>Level</a>
+						<a href="_utils_logger_.html#eloglevel" class="tsd-kind-icon">ELog<wbr>Level</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-external">
-						<a href="_src_utils_logger_.html#__formatlogmessage" class="tsd-kind-icon">__format<wbr>Log<wbr>Message</a>
+						<a href="_utils_logger_.html#customlogger" class="tsd-kind-icon">Custom<wbr>Logger</a>
 					</li>
 				</ul>
 			</nav>
