@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { propEq, equals } from '../external/ramda';
 import { IndexedObject } from '../types';
-import { EValueType, typeOf, ValueType, anyPass, toPairs } from '.';
-import { flow } from 'fp-ts/lib/function';
+import { EValueType, typeOf, ValueType } from '.';
+import { pipe } from './pipe';
+import { toPairs } from './object';
+import { anyPass } from './condition';
 
 /**
  * enumか？
@@ -10,7 +12,7 @@ import { flow } from 'fp-ts/lib/function';
  */
 export const isEnum = <T>(fromEnum: IndexedObject<T>) => (x: unknown): x is T => toPairs(fromEnum).some(propEq('1', x));
 
-const valueTypeEq = (x: unknown, valueType: ValueType) => flow(typeOf, equals(valueType))(x);
+const valueTypeEq = (x: unknown, valueType: ValueType) => pipe(typeOf, equals(valueType))(x);
 export const isString = (x: unknown): x is string => valueTypeEq(x, EValueType.string);
 export const isNumber = (x: unknown): x is number => valueTypeEq(x, EValueType.number);
 export const isSymbol = (x: unknown): x is symbol => valueTypeEq(x, EValueType.symbol);

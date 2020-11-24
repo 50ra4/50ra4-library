@@ -1,6 +1,6 @@
+export * from './enum';
 export * from './logger';
 export * from './lookup';
-export * from './enum';
 export * from './valueType';
 export * from './typeGuard';
 export * from './format';
@@ -10,3 +10,4 @@ export * from './validation';
 export * from './condition';
 export * from './relation';
 export * from './object';
+export * from './pipe';
