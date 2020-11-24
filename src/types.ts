@@ -5,3 +5,4 @@ export type Nullable<T> = T | undefined | null;
 export type ReadonlyPartial<T> = Readonly<Partial<T>>;
 export type FunctionType<A extends ReadonlyArray<unknown>, B = unknown> = (...a: A) => B;
 export type SafePred<A extends ReadonlyArray<unknown>> = FunctionType<A, boolean>;
+export type PromiseType<T extends Promise<unknown>> = T extends Promise<infer P> ? P : never;
