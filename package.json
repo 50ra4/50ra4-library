@@ -11,7 +11,7 @@
   "scripts": {
     "prepare": "npm run build",
     "test": "jest -c ./jest.config.json --watch",
-    "test-ci": "jest -c ./jest.config.json --ci",
+    "test-ci": "jest -c ./jest.config.json --ci --onlyChanged",
     "clean": "rimraf ./dist",
     "build-check": "tsc --noEmit",
     "build-module": "tsc -p ./tsconfig.build.json",
