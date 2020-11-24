@@ -1,6 +1,6 @@
-import { flow } from 'fp-ts/function';
+import { pipe } from './pipe';
 import { ObjectType } from '../types';
-import { prop } from '.';
+import { prop } from './object';
 
 export type Lookup = {
   id: string;
@@ -28,4 +28,4 @@ export const toLookupObject = (lookupItems: Lookup[]): { [id: string]: string } 
  * @param valueKey value
  */
 export const object2LookupObject = <T extends ObjectType>(idKey: keyof T, valueKey: keyof T) =>
-  flow(object2Lookups(idKey, valueKey), toLookupObject);
+  pipe(object2Lookups(idKey, valueKey), toLookupObject);
