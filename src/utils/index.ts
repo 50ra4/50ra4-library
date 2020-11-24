@@ -10,3 +10,4 @@ export * from './validation';
 export * from './condition';
 export * from './relation';
 export * from './object';
+export * from './pipe';
