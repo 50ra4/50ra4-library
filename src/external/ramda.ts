@@ -80,9 +80,9 @@ import identity from 'ramda/src/identity';
 // import ifElse from 'ramda/src/ifElse';
 import inc from 'ramda/src/inc';
 import includes from 'ramda/src/includes';
-import index from 'ramda/src/index';
-import indexBy from 'ramda/src/indexBy';
-import indexOf from 'ramda/src/indexOf';
+// import index from 'ramda/src/index';
+// import indexBy from 'ramda/src/indexBy';
+// import indexOf from 'ramda/src/indexOf';
 import init from 'ramda/src/init';
 import innerJoin from 'ramda/src/innerJoin';
 import insert from 'ramda/src/insert';
@@ -162,8 +162,8 @@ import paths from 'ramda/src/paths';
 // import pick from 'ramda/src/pick';
 import pickAll from 'ramda/src/pickAll';
 import pickBy from 'ramda/src/pickBy';
-import pipe from 'ramda/src/pipe';
-import pipeWith from 'ramda/src/pipeWith';
+// import pipe from 'ramda/src/pipe';
+// import pipeWith from 'ramda/src/pipeWith';
 import pluck from 'ramda/src/pluck';
 import prepend from 'ramda/src/prepend';
 import product from 'ramda/src/product';
@@ -331,9 +331,9 @@ export {
   // ifElse,
   inc,
   includes,
-  index,
-  indexBy,
-  indexOf,
+  // index,
+  // indexBy,
+  // indexOf,
   init,
   innerJoin,
   insert,
@@ -413,8 +413,8 @@ export {
   // pick,
   pickAll,
   pickBy,
-  pipe,
-  pipeWith,
+  // pipe,
+  // pipeWith,
   pluck,
   prepend,
   product,
