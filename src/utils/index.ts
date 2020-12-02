@@ -11,3 +11,4 @@ export * from './condition';
 export * from './relation';
 export * from './object';
 export * from './pipe';
+export * from './id';
